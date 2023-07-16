@@ -8,10 +8,14 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Rails/I18nLocaleTexts:
+  Enabled: false
+
 Style/Documentation:
   Exclude:
+    - app/controllers/**/*.rb
     - app/helpers/application_helper.rb
     - app/models/application_record.rb
     - config/application.rb
-    - test/application_system_test_case.rb
-    - test/test_helper.rb
+    - db/migrate/**/*.rb
+    - test/**/*.rb
