@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_16_214617) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_16_220747) do
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
     t.integer "find_neighborhood_id"
