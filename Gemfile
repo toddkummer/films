@@ -53,6 +53,9 @@ group :development, :test do
 end
 
 group :development do
+  gem 'guard', '~> 2.18.0'
+  gem 'guard-minitest', '~> 2.4.6'
+  gem 'guard-rubocop', '~> 1.5.0'
   gem 'rubocop', '~> 1.54', require: false
   gem 'rubocop-rails', '~> 2.20.2', require: false
   gem 'web-console'
