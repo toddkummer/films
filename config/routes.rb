@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :film_locations
+  resources :films
   resources :companies
   resources :locations
   resources :people

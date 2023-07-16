@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_16_220747) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_16_222405) do
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "film_locations", force: :cascade do |t|
+    t.integer "film_id", null: false
+    t.integer "location_id", null: false
+    t.string "fun_facts"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["film_id"], name: "index_film_locations_on_film_id"
+    t.index ["location_id"], name: "index_film_locations_on_location_id"
+  end
+
+  create_table "films", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "release_year", null: false
+    t.integer "production_company_id", null: false
+    t.integer "distributor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["distributor_id"], name: "index_films_on_distributor_id"
+    t.index ["production_company_id"], name: "index_films_on_production_company_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -40,5 +61,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_220747) do
     t.index ["person_id"], name: "index_person_roles_on_person_id"
   end
 
+  add_foreign_key "film_locations", "films"
+  add_foreign_key "film_locations", "locations"
+  add_foreign_key "films", "companies", column: "distributor_id"
+  add_foreign_key "films", "companies", column: "production_company_id"
   add_foreign_key "person_roles", "people"
 end
