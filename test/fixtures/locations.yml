@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  find_neighborhood_id: 1
+  analysis_neighborhood_id: MyString
+  supervisor_district_id: 1
+
+two:
+  name: MyString
+  find_neighborhood_id: 1
+  analysis_neighborhood_id: MyString
+  supervisor_district_id: 1
