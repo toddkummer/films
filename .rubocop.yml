@@ -1,0 +1,17 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.1
+
+Layout/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Exclude:
+    - app/helpers/application_helper.rb
+    - app/models/application_record.rb
+    - config/application.rb
+    - test/application_system_test_case.rb
+    - test/test_helper.rb
