@@ -5,5 +5,9 @@ class Film < ApplicationRecord
   belongs_to :production_company, class_name: 'Company'
   belongs_to :distributor, class_name: 'Company'
   has_many :film_locations, dependent: :destroy
+
   validates :name, :release_year, presence: true
+
+  delegate :name, to: :production_company, prefix: true
+  delegate :name, to: :distributor, prefix: true
 end

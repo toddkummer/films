@@ -16,9 +16,9 @@ class FilmsTest < ApplicationSystemTestCase
     visit films_url
     click_on 'New film'
 
-    fill_in 'Distributor', with: @film.distributor_id
+    select @film.distributor.name, from: 'film_distributor_id'
     fill_in 'Name', with: @film.name
-    fill_in 'Production company', with: @film.production_company_id
+    select @film.production_company.name, from: 'film_production_company_id'
     fill_in 'Release year', with: @film.release_year
     click_on 'Create Film'
 
@@ -30,9 +30,9 @@ class FilmsTest < ApplicationSystemTestCase
     visit film_url(@film)
     click_on 'Edit this film', match: :first
 
-    fill_in 'Distributor', with: @film.distributor_id
+    select @film.distributor.name, from: 'film_distributor_id'
     fill_in 'Name', with: @film.name
-    fill_in 'Production company', with: @film.production_company_id
+    select @film.production_company.name, from: 'film_production_company_id'
     fill_in 'Release year', with: @film.release_year
     click_on 'Update Film'
 
