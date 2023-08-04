@@ -10,11 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_16_222405) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_04_044705) do
+  create_table "acting_credits", force: :cascade do |t|
+    t.integer "film_id", null: false
+    t.integer "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["film_id"], name: "index_acting_credits_on_film_id"
+    t.index ["person_id"], name: "index_acting_credits_on_person_id"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "directing_credits", force: :cascade do |t|
+    t.integer "film_id", null: false
+    t.integer "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["film_id"], name: "index_directing_credits_on_film_id"
+    t.index ["person_id"], name: "index_directing_credits_on_person_id"
   end
 
   create_table "film_locations", force: :cascade do |t|
@@ -61,9 +79,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_222405) do
     t.index ["person_id"], name: "index_person_roles_on_person_id"
   end
 
+  create_table "writing_credits", force: :cascade do |t|
+    t.integer "film_id", null: false
+    t.integer "person_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["film_id"], name: "index_writing_credits_on_film_id"
+    t.index ["person_id"], name: "index_writing_credits_on_person_id"
+  end
+
+  add_foreign_key "acting_credits", "films"
+  add_foreign_key "acting_credits", "people"
+  add_foreign_key "directing_credits", "films"
+  add_foreign_key "directing_credits", "people"
   add_foreign_key "film_locations", "films"
   add_foreign_key "film_locations", "locations"
   add_foreign_key "films", "companies", column: "distributor_id"
   add_foreign_key "films", "companies", column: "production_company_id"
   add_foreign_key "person_roles", "people"
+  add_foreign_key "writing_credits", "films"
+  add_foreign_key "writing_credits", "people"
 end
