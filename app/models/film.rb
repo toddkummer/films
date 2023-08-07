@@ -3,7 +3,7 @@
 # = Film
 class Film < ApplicationRecord
   belongs_to :production_company, class_name: 'Company'
-  belongs_to :distributor, class_name: 'Company'
+  belongs_to :distributor, class_name: 'Company', optional: true
   has_many :film_locations, dependent: :destroy
 
   with_options dependent: :destroy do

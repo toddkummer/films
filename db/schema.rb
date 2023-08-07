@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_04_044705) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_07_001114) do
   create_table "acting_credits", force: :cascade do |t|
     t.integer "film_id", null: false
     t.integer "person_id", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_04_044705) do
     t.string "name", null: false
     t.integer "release_year", null: false
     t.integer "production_company_id", null: false
-    t.integer "distributor_id", null: false
+    t.integer "distributor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["distributor_id"], name: "index_films_on_distributor_id"
