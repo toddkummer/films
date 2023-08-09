@@ -19,6 +19,33 @@
     <%= film.distributor_name %>
   </p>
 
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Directors:</strong>
+    <ul>
+      <% film.directors.each do |director|  %>
+        <%= tag.li(director) %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Writers:</strong>
+    <ul>
+      <% film.writers.each do |writer|  %>
+        <%= tag.li(writer) %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Actors:</strong>
+    <ul>
+      <% film.actors.each do |actor|  %>
+        <%= tag.li(actor) %>
+      <% end %>
+    </ul>
+  </div>
+
   <% if action_name != "show" %>
     <%= link_to "Show this film", film, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this film', edit_film_path(film), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>

@@ -15,5 +15,17 @@ class Film < ApplicationRecord
   validates :name, :release_year, presence: true
 
   delegate :name, to: :production_company, prefix: true
-  delegate :name, to: :distributor, prefix: true
+  delegate :name, to: :distributor, prefix: true, allow_nil: true
+
+  def directors
+    directing_credits.map(&:person)
+  end
+
+  def writers
+    writing_credits.map(&:person)
+  end
+
+  def actors
+    acting_credits.map(&:person)
+  end
 end

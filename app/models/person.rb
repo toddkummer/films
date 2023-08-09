@@ -16,4 +16,8 @@ class Person < ApplicationRecord
       roles.any? { |r| r.public_send(predicate) }
     end
   end
+
+  def to_s
+    name
+  end
 end
