@@ -10,6 +10,17 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">Locations:</strong>
+    <ul>
+      <% film.film_locations.map(&:location).each do |location|  %>
+      <li>
+        <%= link_to location.name, location, class: 'text-blue-600' %>
+      </li>
+      <% end %>
+    </ul>
+  </p>
+
+  <p class="my-5">
     <strong class="block font-medium mb-1">Production company:</strong>
     <%= film.production_company_name %>
   </p>
