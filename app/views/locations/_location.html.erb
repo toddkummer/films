@@ -4,6 +4,17 @@
     <%= location.name %>
   </p>
 
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Films:</strong>
+    <ul>
+      <% location.film_locations.map(&:film).each do |film|  %>
+        <li>
+          <%= link_to film.name, film, class: 'text-blue-600' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
   <p class="my-5">
     <strong class="block font-medium mb-1">Find neighborhood:</strong>
     <%= location.find_neighborhood_id %>
