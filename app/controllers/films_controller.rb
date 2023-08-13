@@ -5,7 +5,11 @@ class FilmsController < ApplicationController
 
   # GET /films
   def index
-    @films = Film.all
+    @films = Film.includes(:production_company, :distributor,
+                           film_locations: :location,
+                           directing_credits: :person,
+                           acting_credits: :person,
+                           writing_credits: :person).all.limit(10)
   end
 
   # GET /films/1
