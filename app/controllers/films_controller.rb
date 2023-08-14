@@ -10,6 +10,12 @@ class FilmsController < ApplicationController
                            directing_credits: :person,
                            acting_credits: :person,
                            writing_credits: :person).all.limit(10)
+    @films = @films.where('name like ?', "%#{Film.sanitize_sql_like(params[:name])}%") if params.key?(:name)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @films, only: %i[id name release_year] }
+    end
   end
 
   # GET /films/1

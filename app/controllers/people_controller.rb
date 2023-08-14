@@ -6,6 +6,16 @@ class PeopleController < ApplicationController
   # GET /people
   def index
     @people = Person.all
+
+    @people = @people.where('name like ?', "%#{Person.sanitize_sql_like(params[:name])}%") if params.key?(:name)
+    @people = @people.director if params[:director]
+    @people = @people.writer if params[:writer]
+    @people = @people.actor if params[:actor]
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @people.limit(5), only: %i[id name] }
+    end
   end
 
   # GET /people/1

@@ -6,6 +6,12 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     @locations = Location.all
+    @locations = @locations.where('name like ?', "%#{Location.sanitize_sql_like(params[:name])}%") if params.key?(:name)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @locations.limit(8), only: %i[id name] }
+    end
   end
 
   # GET /locations/1
