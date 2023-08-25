@@ -10,7 +10,7 @@ class FilmsController < ApplicationController
                            directing_credits: :person,
                            acting_credits: :person,
                            writing_credits: :person).all.limit(10)
-    @films = @films.where('name like ?', "%#{Film.sanitize_sql_like(params[:name])}%") if params.key?(:name)
+    apply_optional_criteria
 
     respond_to do |format|
       format.html
@@ -65,5 +65,24 @@ class FilmsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def film_params
     params.require(:film).permit(:name, :release_year, :production_company_id, :distributor_id)
+  end
+
+  def apply_optional_criteria # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    @films = @films.where('name like ?', "%#{Film.sanitize_sql_like(params[:name])}%") if params.key?(:name)
+
+    if params.key?(:director_id)
+      @films = @films.joins(:directing_credits).merge(DirectingCredit.where(person_id: params[:director_id]))
+    end
+    if params.key?(:actor_id)
+      @films = @films.joins(:acting_credits).merge(ActingCredit.where(person_id: params[:actor_id]))
+    end
+
+    if params.key?(:writer_id)
+      @films = @films.joins(:writing_credits).merge(WritingCredit.where(person_id: params[:writer_id]))
+    end
+
+    return unless params.key?(:location_id)
+
+    @films = @films.joins(:film_locations).merge(FilmLocation.where(location_id: params[:location_id]))
   end
 end

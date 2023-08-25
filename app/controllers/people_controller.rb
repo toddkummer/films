@@ -6,11 +6,7 @@ class PeopleController < ApplicationController
   # GET /people
   def index
     @people = Person.all
-
-    @people = @people.where('name like ?', "%#{Person.sanitize_sql_like(params[:name])}%") if params.key?(:name)
-    @people = @people.director if params[:director]
-    @people = @people.writer if params[:writer]
-    @people = @people.actor if params[:actor]
+    apply_optional_criteria
 
     respond_to do |format|
       format.html
@@ -65,5 +61,12 @@ class PeopleController < ApplicationController
   # Only allow a list of trusted parameters through.
   def person_params
     params.require(:person).permit(:name)
+  end
+
+  def apply_optional_criteria
+    @people = @people.where('name like ?', "%#{Person.sanitize_sql_like(params[:name])}%") if params.key?(:name)
+    @people = @people.director if params[:director]
+    @people = @people.writer if params[:writer]
+    @people = @people.actor if params[:actor]
   end
 end
