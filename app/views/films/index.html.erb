@@ -8,9 +8,13 @@
     <%= link_to 'New film', new_film_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div class="my-3" data-controller="algolia-autocomplete"></div>
 
-  <div id="films" class="min-w-full">
-    <%= render @films %>
+  <div class="my-3" data-controller="algolia-autocomplete">
+    <div class="my-3" data-algolia-autocomplete-target="searchInput"></div>
+
+    <turbo-frame id="films" class="min-w-full" data-algolia-autocomplete-target="results" target="_top">
+      <%= render @films %>
+    </turbo-frame>
+
   </div>
 </div>
