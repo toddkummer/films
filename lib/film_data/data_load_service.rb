@@ -62,7 +62,7 @@ module FilmData
     def build_actors(film, data)
       data.actors.each do |actor|
         person = @person_cache[actor]
-        film.writing_credits.build(person:)
+        film.acting_credits.build(person:)
         person.roles.build(role: :actor) unless person.actor?
       end
     end
