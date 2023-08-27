@@ -237,7 +237,6 @@ export default class extends Controller {
   search() {
     const searchParams = new URLSearchParams();
     this.filterChipTargets.forEach((filterChip) => {
-      console.log(filterChip)
       searchParams.append(filterChip.dataset.paramNameValue, filterChip.dataset.paramValue)
     })
     this.resultsTarget.src = `/films?${searchParams}`
