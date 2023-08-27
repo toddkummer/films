@@ -73,7 +73,7 @@ class NameContainsSource extends SearchSource {
 
   onSelect = this.onSelect.bind(this)
   onSelect(params) {
-    this.quickSearch.addFilter('name', params.item.name)
+    this.quickSearch.addFilter(`Name contains ${params.item.name}`, "name", params.item.name)
   }
 }
 
@@ -114,7 +114,7 @@ class LocationsSource extends SearchSource {
 
   onSelect = this.onSelect.bind(this)
   onSelect(params) {
-    this.quickSearch.addFilter('location_id', params.item.id)
+    this.quickSearch.addFilter("Location: ", "location_id", params.item.id)
   }
 }
 
@@ -135,12 +135,13 @@ class PeopleSource extends SearchSource {
 
   onSelect = this.onSelect.bind(this)
   onSelect(params) {
-    this.quickSearch.addFilter(this.constructor.filterKey, params.item.id)
+    this.quickSearch.addFilter(`${this.constructor.filterLabel}: ${params.item.name}`, this.constructor.filterKey, params.item.id)
   }
 }
 
 
 class DirectorsSource extends PeopleSource {
+  static filterLabel = "Director"
   static filterKey = "director_id"
   static fetchDataAdditionalParams = "&director=true"
 
@@ -151,6 +152,7 @@ class DirectorsSource extends PeopleSource {
 }
 
 class WritersSource extends PeopleSource {
+  static filterLabel = "Writer"
   static filterKey = "writer_id"
   static fetchDataAdditionalParams = "&writer=true"
 
@@ -161,6 +163,7 @@ class WritersSource extends PeopleSource {
 }
 
 class ActorsSource extends PeopleSource {
+  static filterLabel = "Actor"
   static filterKey = "actor_id"
   static fetchDataAdditionalParams = "&actor=true"
 
@@ -170,25 +173,85 @@ class ActorsSource extends PeopleSource {
                 header() { return "Filter by actor" }}
 }
 
-export default class extends Controller {
-  static targets = ["searchInput", "results"]
-
-  initialize() {
-    this.query = {}
+class FilterChip {
+  static build(document, label, name, value) {
+    const builder = new this(label, name, value)
+    return builder.createElement(document)
+  }
+  constructor(label, name, value) {
+    this.label = label
+    this.name = name
+    this.value = value
   }
 
+  createElement(document) {
+    const chip = this.#buildButton(document)
+    chip.appendChild(this.#buildLabel(document))
+    chip.appendChild(this.#buildCloseButton(document))
+    return chip
+  }
+
+  #buildButton(document) {
+    const button = document.createElement("button")
+    button.setAttribute('type', 'button')
+    button.classList.add("ds-c-filter-chip__button")
+    button.dataset.algoliaAutocompleteTarget = "filterChip"
+    button.dataset.paramNameValue = this.name
+    button.dataset.paramValue = this.value
+
+    return button
+  }
+
+  #buildLabel(document) {
+    const label = document.createElement("span")
+    label.classList.add("ds-c-filter-chip__label")
+    label.appendChild(document.createTextNode(this.label))
+    return label
+  }
+
+  #buildCloseButton(document) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path")
+    path.setAttribute("fill", "none")
+    path.setAttribute("stroke", "currentColor")
+    path.setAttribute("stroke-linecap", "round")
+    path.setAttribute("strokeWidth", "2")
+    path.setAttribute("d", "M0 13.0332964L13.0332964 0M13.0332964 13.0332964L0 0")
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+    svg.classList.add("ds-c-icon", "ds-c-icon--close", "ds-c-icon--close-thin")
+    svg.setAttribute("viewBox", "-2 -2 18 18")
+    svg.appendChild(path)
+
+    const container = document.createElement("span")
+    container.classList.add("ds-c-filter-chip__clear-icon-container", "ds-c-filter-chip__clear-icon-alternate-container")
+    container.dataset.action = "algolia-autocomplete#removeFilter"
+    container.appendChild(svg)
+
+    return container
+  }
+}
+
+export default class extends Controller {
+  static targets = ["searchInput", "filterChips", "filterChip", "results"]
+
   search() {
-    const searchParams = new URLSearchParams(this.query);
+    const searchParams = new URLSearchParams();
+    this.filterChipTargets.forEach((filterChip) => {
+      console.log(filterChip)
+      searchParams.append(filterChip.dataset.paramNameValue, filterChip.dataset.paramValue)
+    })
     this.resultsTarget.src = `/films?${searchParams}`
   }
 
-  addFilter(key, value) {
-    this.query[key] = value
+  addFilter(label, name, value) {
+    this.filterChipsTarget.appendChild(FilterChip.build(document, label, name, value))
+    this.element.querySelector("form").reset()
     this.search()
   }
 
-  removeFilter(key) {
-    delete this.query[key]
+  removeFilter(event) {
+    console.log(event)
+    event.element.remove()
   }
 
   connect() {

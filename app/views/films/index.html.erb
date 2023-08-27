@@ -11,6 +11,7 @@
 
   <div class="my-3" data-controller="algolia-autocomplete">
     <div class="my-3" data-algolia-autocomplete-target="searchInput"></div>
+    <div data-algolia-autocomplete-target="filterChips"></div>
 
     <turbo-frame id="films" class="min-w-full" data-algolia-autocomplete-target="results" target="_top">
       <%= render @films %>
