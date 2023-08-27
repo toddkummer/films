@@ -81,7 +81,7 @@ class FilmsSource extends SearchSource {
   sourceId = "films"
 
   async fetchData(query) {
-    const response = await fetch(`films.json?name=${query}`)
+    const response = await fetch(`/films.json?name=${query}`)
     return await response.json()
   }
 
@@ -90,7 +90,7 @@ class FilmsSource extends SearchSource {
       return 'Jump to...';
     },
     item({ item, html }) {
-      return html`<a href="films/${item.id}">${item.name} (${item.release_year})</a>`
+      return html`<a href="/films/${item.id}">${item.name} (${item.release_year})</a>`
     }
   }
 }
@@ -99,7 +99,7 @@ class LocationsSource extends SearchSource {
   sourceId = "locations"
 
   async fetchData(query) {
-    const response = await fetch(`locations.json?name=${query}`)
+    const response = await fetch(`/locations.json?name=${query}`)
     return await response.json()
   }
 
@@ -129,7 +129,7 @@ class PeopleSource extends SearchSource {
   }
 
   async fetchData(query) {
-    const response = await fetch(`people.json?name=${query}${this.constructor.fetchDataAdditionalParams}`)
+    const response = await fetch(`/people.json?name=${query}${this.constructor.fetchDataAdditionalParams}`)
     return await response.json()
   }
 
@@ -195,7 +195,7 @@ class FilterChip {
     const button = document.createElement("button")
     button.setAttribute('type', 'button')
     button.classList.add("ds-c-filter-chip__button")
-    button.dataset.algoliaAutocompleteTarget = "filterChip"
+    button.dataset.quicksearchTarget = "filterChip"
     button.dataset.paramNameValue = this.name
     button.dataset.paramValue = this.value
 
@@ -224,7 +224,7 @@ class FilterChip {
 
     const container = document.createElement("span")
     container.classList.add("ds-c-filter-chip__clear-icon-container", "ds-c-filter-chip__clear-icon-alternate-container")
-    container.dataset.action = "algolia-autocomplete#removeFilter"
+    container.dataset.action = "click->quicksearch#removeFilter"
     container.appendChild(svg)
 
     return container
@@ -250,8 +250,8 @@ export default class extends Controller {
   }
 
   removeFilter(event) {
-    console.log(event)
-    event.element.remove()
+    event.currentTarget.closest("button").remove()
+    this.search()
   }
 
   connect() {
