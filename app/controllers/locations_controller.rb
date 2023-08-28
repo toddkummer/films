@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
+  before_action :build_filtered_query, only: :index
   before_action :set_location, only: %i[show edit update destroy]
+
+  filter :name, partial: true
 
   # GET /locations
   def index
-    @locations = Location.all
-    @locations = @locations.where('name like ?', "%#{Location.sanitize_sql_like(params[:name])}%") if params.key?(:name)
-
     respond_to do |format|
       format.html
-      format.json { render json: @locations.limit(8), only: %i[id name] }
+      format.json { render json: @locations.limit(page_limit), only: %i[id name] }
     end
   end
 

@@ -7,7 +7,7 @@ window.process = { env: {} }
 class SearchSource {
   sourceId
   powerSearchCode
-  powerSearchRegex = /^(?<code>[a-z{1,2}]): (?<query>.*)/i
+  powerSearchRegex = /^(?<code>[a-z{1,2}]):\s*(?<query>.*)/i
   minimumCharactersRequired = 1
 
   constructor(quickSearch) {
@@ -21,7 +21,7 @@ class SearchSource {
     if (this.skip(query)) {
       return []
     } else {
-      return this.fetchData(this.extractQuery(query))
+      return this.fetchData(this.queryOptions(query))
     }
   }
 
@@ -44,16 +44,16 @@ class SearchSource {
     return query.length < this.minimumCharactersRequired
   }
 
-  extractQuery(query) {
+  queryOptions(query) {
     const found = query.match(this.powerSearchRegex)
     if (found === null) {
-      return query
+      return { query, limit: 5 }
     } else {
-      return found.groups.query
+      return { query: found.groups.query, limit: 20 }
     }
   }
 
-  fetchData(query) {
+  fetchData({ query, limit }) {
     throw new Error('Method fetchData must be implemented')
   }
 }
@@ -67,7 +67,7 @@ class NameContainsSource extends SearchSource {
       }
     }
 
-  fetchData(query) {
+  fetchData({query}) {
     return { name: query }
   }
 
@@ -79,9 +79,10 @@ class NameContainsSource extends SearchSource {
 
 class FilmsSource extends SearchSource {
   sourceId = "films"
+  powerSearchCode = "F"
 
-  async fetchData(query) {
-    const response = await fetch(`/films.json?name=${query}`)
+  async fetchData({ query, limit }) {
+    const response = await fetch(`/films.json?filter[name]=${query}&limit=${limit}`)
     return await response.json()
   }
 
@@ -97,9 +98,10 @@ class FilmsSource extends SearchSource {
 
 class LocationsSource extends SearchSource {
   sourceId = "locations"
+  powerSearchCode = "L"
 
-  async fetchData(query) {
-    const response = await fetch(`/locations.json?name=${query}`)
+  async fetchData({ query, limit }) {
+    const response = await fetch(`/locations.json?filter[name]=${query}&limit=${limit}`)
     return await response.json()
   }
 
@@ -114,7 +116,7 @@ class LocationsSource extends SearchSource {
 
   onSelect = this.onSelect.bind(this)
   onSelect(params) {
-    this.quickSearch.addFilter("Location: ", "location_id", params.item.id)
+    this.quickSearch.addFilter(`Location: ${params.item.name}`, "location_id", params.item.id)
   }
 }
 
@@ -128,8 +130,8 @@ class PeopleSource extends SearchSource {
     }
   }
 
-  async fetchData(query) {
-    const response = await fetch(`/people.json?name=${query}${this.constructor.fetchDataAdditionalParams}`)
+  async fetchData({query, limit}) {
+    const response = await fetch(`/people.json?filter[name]=${query}${this.constructor.fetchDataAdditionalParams}&limit=${limit}`)
     return await response.json()
   }
 
@@ -143,9 +145,10 @@ class PeopleSource extends SearchSource {
 class DirectorsSource extends PeopleSource {
   static filterLabel = "Director"
   static filterKey = "director_id"
-  static fetchDataAdditionalParams = "&director=true"
+  static fetchDataAdditionalParams = "&filter[director]=true"
 
   sourceId = "directors"
+  powerSearchCode = "D"
 
   templates = { ...this.templates,
                 header() { return "Filter by director" }}
@@ -154,7 +157,7 @@ class DirectorsSource extends PeopleSource {
 class WritersSource extends PeopleSource {
   static filterLabel = "Writer"
   static filterKey = "writer_id"
-  static fetchDataAdditionalParams = "&writer=true"
+  static fetchDataAdditionalParams = "&filter[writer]=true"
 
   sourceId = "writers"
 
@@ -165,7 +168,7 @@ class WritersSource extends PeopleSource {
 class ActorsSource extends PeopleSource {
   static filterLabel = "Actor"
   static filterKey = "actor_id"
-  static fetchDataAdditionalParams = "&actor=true"
+  static fetchDataAdditionalParams = "&filter[actor]=true"
 
   sourceId = "actors"
 
@@ -237,7 +240,7 @@ export default class extends Controller {
   search() {
     const searchParams = new URLSearchParams();
     this.filterChipTargets.forEach((filterChip) => {
-      searchParams.append(filterChip.dataset.paramNameValue, filterChip.dataset.paramValue)
+      searchParams.append(`filter[${filterChip.dataset.paramNameValue}]`, filterChip.dataset.paramValue)
     })
     this.resultsTarget.src = `/films?${searchParams}`
   }
