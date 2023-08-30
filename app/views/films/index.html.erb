@@ -9,7 +9,12 @@
   </div>
 
 
-  <div class="my-3" data-controller="quicksearch">
+  <div class="my-3" 
+      data-controller="quicksearch"
+      data-quicksearch-path-value="/films"
+      data-quicksearch-placeholder-value="Search for films"
+      data-quicksearch-sources-value=<%= ["NameContainsSource", "FilmsSource", "LocationsSource", "DirectorsSource", "WritersSource", "ActorsSource"].to_json %>
+    >
     <div class="my-3" data-quicksearch-target="searchInput"></div>
     <div data-quicksearch-target="filterChips"></div>
 
