@@ -94,7 +94,7 @@ export default class extends Controller {
 
     this.instance = autocomplete({
       container: this.searchInputTarget,
-      placeholder: this.pathValue,
+      placeholder: this.placeholderValue,
       autofocus: true,
       getSources() { return sources },
     })
