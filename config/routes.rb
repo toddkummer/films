@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'films#index'
+
   resources :film_locations
-  resources :films
+  resources :films do
+    resource :poster, module: :films, only: [:show]
+  end
+
   resources :companies
   resources :locations
   resources :people
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
