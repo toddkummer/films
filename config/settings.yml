@@ -1,0 +1,2 @@
+shared:
+  tmdb_api_read_access_token: <%= ENV['TMDB_API_READ_ACCESS_TOKEN'] %>
