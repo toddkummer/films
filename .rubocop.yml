@@ -19,3 +19,6 @@ Style/Documentation:
     - config/application.rb
     - db/migrate/**/*.rb
     - test/**/*.rb
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: either
