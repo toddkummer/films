@@ -12,6 +12,11 @@ class FilmsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'should get index with name criteria' do
+    get films_url(params: { filter: { name: 'bears' } })
+    assert_response :success
+  end
+
   test 'should get new' do
     get new_film_url
     assert_response :success
