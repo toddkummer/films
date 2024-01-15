@@ -10,16 +10,19 @@ class FilmsController < ApplicationController
   filter :writer_id, name: :written_by
   filter :actor_id, name: :acted_by
 
-  # GET /films
-  def index
-    @films = @films.includes(:production_company, :distributor,
-                             film_locations: :location,
+  EAGER_LOADS_FOR_INDEX = [:production_company, :distributor,
+                           { film_locations: :location,
                              directing_credits: :person,
                              acting_credits: :person,
-                             writing_credits: :person).limit(page_limit)
+                             writing_credits: :person }].freeze
+
+  # GET /films
+  def index
+    @films = @films.includes(EAGER_LOADS_FOR_INDEX)
+                   .limit(page_limit)
 
     respond_to do |format|
-      format.html
+      format.html { build_filter_chips }
       format.json { render json: @films, only: %i[id name release_year] }
     end
   end
@@ -71,5 +74,11 @@ class FilmsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def film_params
     params.require(:film).permit(:name, :release_year, :production_company_id, :distributor_id)
+  end
+
+  def build_filter_chips
+    @filter_chips = params.to_unsafe_h.fetch(:filter, []).map do |field_name, value|
+      Filter.factory(field_name, value)
+    end
   end
 end

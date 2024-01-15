@@ -1,4 +1,6 @@
 export class SearchSource {
+  static filterKey
+
   sourceId
   powerSearchCode
   powerSearchRegex = /^(?<code>[a-z{1,2}]):\s*(?<query>.*)/i
@@ -17,6 +19,15 @@ export class SearchSource {
     } else {
       return this.fetchData(this.queryOptions(query))
     }
+  }
+
+  onSelect = this.onSelect.bind(this)
+  onSelect(params) {
+    this.quickSearch.onSelect(this.constructor.filterKey, this.filterValue(params.item))
+  }
+
+  filterValue(item) {
+    return item.id
   }
 
   skip(query) {
@@ -53,6 +64,7 @@ export class SearchSource {
 }
 
 export class NameContainsSource extends SearchSource {
+  static filterKey = "name"
   sourceId = "name-contains"
 
   templates = {
@@ -65,9 +77,8 @@ export class NameContainsSource extends SearchSource {
     return { name: query }
   }
 
-  onSelect = this.onSelect.bind(this)
-  onSelect(params) {
-    this.quickSearch.addFilter(`Name contains ${params.item.name}`, "name", params.item.name)
+  filterValue(item) {
+    return item.name
   }
 }
 
@@ -88,9 +99,12 @@ export class FilmsSource extends SearchSource {
       return html`<a href="/films/${item.id}">${item.name} (${item.release_year})</a>`
     }
   }
+
+  onSelect() { }
 }
 
 export class LocationsSource extends SearchSource {
+  static filterKey = "location_id"
   sourceId = "locations"
   powerSearchCode = "L"
 
@@ -106,11 +120,6 @@ export class LocationsSource extends SearchSource {
     item({ item }) {
       return `${item.name}`
     }
-  }
-
-  onSelect = this.onSelect.bind(this)
-  onSelect(params) {
-    this.quickSearch.addFilter(`Location: ${params.item.name}`, "location_id", params.item.id)
   }
 }
 
@@ -128,16 +137,10 @@ export class PeopleSource extends SearchSource {
     const response = await fetch(`/people.json?filter[name]=${query}${this.constructor.fetchDataAdditionalParams}&limit=${limit}`)
     return await response.json()
   }
-
-  onSelect = this.onSelect.bind(this)
-  onSelect(params) {
-    this.quickSearch.addFilter(`${this.constructor.filterLabel}: ${params.item.name}`, this.constructor.filterKey, params.item.id)
-  }
 }
 
 
 export class DirectorsSource extends PeopleSource {
-  static filterLabel = "Director"
   static filterKey = "director_id"
   static fetchDataAdditionalParams = "&filter[director]=true"
 
@@ -149,7 +152,6 @@ export class DirectorsSource extends PeopleSource {
 }
 
 export class WritersSource extends PeopleSource {
-  static filterLabel = "Writer"
   static filterKey = "writer_id"
   static fetchDataAdditionalParams = "&filter[writer]=true"
 
@@ -160,7 +162,6 @@ export class WritersSource extends PeopleSource {
 }
 
 export class ActorsSource extends PeopleSource {
-  static filterLabel = "Actor"
   static filterKey = "actor_id"
   static fetchDataAdditionalParams = "&filter[actor]=true"
 

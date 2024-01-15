@@ -8,19 +8,23 @@
     <%= link_to 'New film', new_film_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-
-  <div class="my-3" 
+  <div class="my-3"
       data-controller="quicksearch"
-      data-quicksearch-path-value="/films"
       data-quicksearch-placeholder-value="Search for films"
       data-quicksearch-sources-value=<%= ["NameContainsSource", "FilmsSource", "LocationsSource", "DirectorsSource", "WritersSource", "ActorsSource"].to_json %>
     >
     <div class="my-3" data-quicksearch-target="searchInput"></div>
-    <div data-quicksearch-target="filterChips"></div>
-
-    <turbo-frame id="films" class="min-w-full" data-quicksearch-target="results" target="_top">
-      <%= render @films %>
-    </turbo-frame>
-
   </div>
+
+  <div>
+    <%= form_with url: films_path, scope: :filter,
+                                   method: :get,
+                                   data: { controller: "filter",
+                                           action: "autocompleteSelection@document->filter#add" } do |form| %>
+      <%= render @filter_chips, form: form %>
+    <% end %>
+  </div>
+
+  <%= render @films %>
+
 </div>
