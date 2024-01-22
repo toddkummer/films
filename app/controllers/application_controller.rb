@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Filterameter::DeclarativeControllerFilters
+  include NextPage::Pagination
 
   private
 

@@ -19,7 +19,7 @@ class FilmsController < ApplicationController
   # GET /films
   def index
     @films = @films.includes(EAGER_LOADS_FOR_INDEX)
-                   .limit(page_limit)
+    @films = paginate_resource(@films)
 
     respond_to do |format|
       format.html { build_filter_chips }

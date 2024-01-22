@@ -13,4 +13,23 @@ module ApplicationHelper
       turbo_frame_tag(:poster, src: film_poster_path(film))
     end
   end
+
+  def paginate(query)
+    pagination = Pagination.new(query.current_page, query.total_pages)
+    tag.nav(aria_label: 'pagination') do
+      tag.ul(class: 'pagination') do
+        pagination.links.each do |page_number, display|
+          concat(tag.li do
+                   pagination_link(query.model, page_number, display, current: query.current_page == page_number)
+                 end)
+        end
+      end
+    end
+  end
+
+  def pagination_link(model, page_number, display, current: false)
+    link_to(display,
+            [model, { params: { page: { number: page_number } } }],
+            ({ 'aria-current': 'page' } if current))
+  end
 end
