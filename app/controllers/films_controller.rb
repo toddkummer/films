@@ -22,7 +22,10 @@ class FilmsController < ApplicationController
     @films = paginate_resource(@films)
 
     respond_to do |format|
-      format.html { build_filter_chips }
+      format.html do
+        @query_params = params.to_unsafe_h.slice('filter', 'page')
+        build_filter_chips
+      end
       format.json { render json: @films, only: %i[id name release_year] }
     end
   end
