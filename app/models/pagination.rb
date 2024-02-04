@@ -18,7 +18,11 @@ class Pagination
   end
 
   def show_pagination?
-    @total_pages == 1
+    @total_pages > 1
+  end
+
+  def current?(page_number)
+    @current_page == page_number
   end
 
   def show_first?
@@ -29,12 +33,24 @@ class Pagination
     @current_page > 1
   end
 
+  def previous_page
+    @current_page - 1
+  end
+
   def show_next?
     @current_page < @total_pages
   end
 
+  def next_page
+    @current_page + 1
+  end
+
   def show_last?
     @current_page < @total_pages - 1
+  end
+
+  def last_page
+    @total_pages
   end
 
   def pages
