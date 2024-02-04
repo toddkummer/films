@@ -19,10 +19,13 @@ class FilmsController < ApplicationController
   # GET /films
   def index
     @films = @films.includes(EAGER_LOADS_FOR_INDEX)
-                   .limit(page_limit)
+    @films = paginate_resource(@films)
 
     respond_to do |format|
-      format.html { build_filter_chips }
+      format.html do
+        @query_params = params.to_unsafe_h.slice('filter', 'page')
+        build_filter_chips
+      end
       format.json { render json: @films, only: %i[id name release_year] }
     end
   end

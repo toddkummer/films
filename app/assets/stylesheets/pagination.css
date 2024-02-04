@@ -1,0 +1,52 @@
+nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  padding-top: 0.5em;
+}
+
+.pagination {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.pagination a {
+  display: flex;
+  align-items: center;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  height: 2rem;
+  border-width: 1px;
+  border-color: rgb(209 213 219);
+  color: rgb(107 114 128);
+}
+
+
+
+.pagination a:hover {
+  color: rgb(55 65 81);
+  background-color: rgb(243 244 246);
+}
+
+.pagination li:first-child a {
+  border-end-start-radius: .5rem;
+  border-start-start-radius: .5rem;
+}
+
+.pagination li:last-child a {
+  border-end-end-radius: .5rem;
+  border-start-end-radius: .5rem;
+}
+
+.pagination a.active {
+  background-color: rgb(235 245 255);
+  border-color: rgb(164 202 254);
+  color: rgb(28 100 242);
+}
+
+.pagination a.active:hover {
+  background-color: rgb(225 239 254);
+  color: rgb(26 86 219);
+}

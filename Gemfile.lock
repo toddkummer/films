@@ -151,6 +151,8 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
+    next_page (0.2.0)
+      rails (>= 6.1.7)
     nio4r (2.5.9)
     nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
@@ -279,6 +281,7 @@ DEPENDENCIES
   guard-minitest (~> 2.4.6)
   guard-rubocop (~> 1.5.0)
   importmap-rails
+  next_page
   puma (~> 5.0)
   rails (~> 7.0.6)
   rubocop (~> 1.54)
