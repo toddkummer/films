@@ -3,10 +3,12 @@
 # Pin npm packages by running ./bin/importmap
 
 pin 'application', preload: true
+pin_all_from 'app/javascript/controllers', under: 'controllers'
+pin_all_from 'app/javascript/src', under: 'src'
+
 pin '@hotwired/turbo-rails', to: 'turbo.min.js', preload: true
 pin '@hotwired/stimulus', to: 'stimulus.min.js', preload: true
 pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
-pin_all_from 'app/javascript/controllers', under: 'controllers'
 pin '@algolia/autocomplete-js', to: 'https://ga.jspm.io/npm:@algolia/autocomplete-js@1.10.0/dist/esm/index.js'
 pin '@algolia/autocomplete-core', to: 'https://ga.jspm.io/npm:@algolia/autocomplete-core@1.10.0/dist/esm/index.js'
 pin '@algolia/autocomplete-plugin-algolia-insights', to: 'https://ga.jspm.io/npm:@algolia/autocomplete-plugin-algolia-insights@1.10.0/dist/esm/index.js'
