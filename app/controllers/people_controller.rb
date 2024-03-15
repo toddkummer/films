@@ -65,11 +65,4 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:name)
   end
-
-  def apply_optional_criteria
-    @people = @people.where('name like ?', "%#{Person.sanitize_sql_like(params[:name])}%") if params.key?(:name)
-    @people = @people.director if params[:director]
-    @people = @people.writer if params[:writer]
-    @people = @people.actor if params[:actor]
-  end
 end
