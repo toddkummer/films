@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.4'
 
-gem 'filterameter', '~> 0.3'
+gem 'filterameter', '~> 0.4'
 gem 'next_page'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
