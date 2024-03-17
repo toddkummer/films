@@ -13,7 +13,12 @@ namespace :film_data do
       service.process_film_data(data)
       putc '.' if (index % 10).zero?
     end
-    puts "\nLoaded #{Film.count} films with #{Location.count} locations and #{Person.count} people (#{PersonRole.director.count} directors, #{PersonRole.actor.count} actors, #{PersonRole.writer.count} writers)"
+    puts "\nLoaded #{Film.count} films with \
+          #{Location.count} locations and \
+          #{Person.count} people \
+          (#{PersonRole.director.count} directors, \
+          #{PersonRole.actor.count} actors, \
+          #{PersonRole.writer.count} writers)"
   end
 
   desc 'Clear film data from database'
