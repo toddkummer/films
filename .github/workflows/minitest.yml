@@ -1,0 +1,24 @@
+name: minitest
+on:
+  - push
+
+jobs:
+  tests:
+    name: minitest
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle exec rails test:prepare
+          bundle exec rails test
