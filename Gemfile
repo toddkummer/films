@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.4'
+ruby file: '.ruby-version'
 
 gem 'filterameter', '~> 0.4'
 gem 'next_page'
