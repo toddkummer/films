@@ -10,9 +10,9 @@ class Person < ApplicationRecord
     has_many :acting_credits
   end
 
-  scope :director, ->(_ = nil) { joins(:roles).merge(PersonRole.director) }
-  scope :writer, ->(_ = nil) { joins(:roles).merge(PersonRole.writer) }
-  scope :actor, ->(_ = nil) { joins(:roles).merge(PersonRole.actor) }
+  scope :director, -> { joins(:roles).merge(PersonRole.director) }
+  scope :writer, -> { joins(:roles).merge(PersonRole.writer) }
+  scope :actor, -> { joins(:roles).merge(PersonRole.actor) }
 
   PersonRole.roles.each_key do |role|
     predicate = "#{role}?"
