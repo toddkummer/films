@@ -106,7 +106,7 @@ GEM
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
-    filterameter (0.8.0)
+    filterameter (0.9.0)
       rails (>= 6.1)
     formatador (1.1.0)
     globalid (1.2.1)
