@@ -5,7 +5,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby file: '.ruby-version'
 
-gem 'filterameter', '~> 0.8'
+# gem 'filterameter', '~> 0.8'
+gem 'filterameter', github: 'RockSolt/filterameter', branch: 'main'
 gem 'next_page'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

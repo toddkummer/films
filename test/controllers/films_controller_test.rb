@@ -7,6 +7,11 @@ class FilmsControllerTest < ActionDispatch::IntegrationTest
     @film = films(:one)
   end
 
+  test 'declarations' do
+    validator = FilmsController.declarations_validator
+    assert_predicate validator, :valid?, -> { validator.errors }
+  end
+
   test 'should get index' do
     get films_url
     assert_response :success
