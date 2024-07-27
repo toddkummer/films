@@ -7,6 +7,11 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
     @person = people(:one)
   end
 
+  test 'declarations' do
+    validator = PeopleController.declarations_validator
+    assert_predicate validator, :valid?, -> { validator.errors }
+  end
+
   test 'should get index' do
     get people_url
     assert_response :success

@@ -7,6 +7,11 @@ class LocationsControllerTest < ActionDispatch::IntegrationTest
     @location = locations(:one)
   end
 
+  test 'declarations' do
+    validator = LocationsController.declarations_validator
+    assert_predicate validator, :valid?, -> { validator.errors }
+  end
+
   test 'should get index' do
     get locations_url
     assert_response :success
