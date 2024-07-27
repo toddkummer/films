@@ -9,12 +9,10 @@ jobs:
       - uses: actions/checkout@v1
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2
       - name: Install RuboCop
         run: |
           gem install bundler --no-document
-          gem install rubocop -v 1.56.2 --no-document
-          gem install rubocop-rails -v 2.20.2 --no-document
+          gem install rubocop -v 1.65.0 --no-document
+          gem install rubocop-rails -v 2.25.1 --no-document
       - name: RuboCop
         run: rubocop
