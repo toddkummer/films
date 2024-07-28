@@ -5,7 +5,6 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Films</h1>
-    <%= link_to 'New film', new_film_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div class="my-3"
@@ -16,14 +15,31 @@
     <div class="my-3" data-quicksearch-target="searchInput"></div>
   </div>
 
-  <div>
-    <%= form_with url: films_path, scope: :filter,
+  <%= form_with url: films_path, scope: :filter,
                                    method: :get,
                                    data: { controller: "filter",
                                            action: "autocompleteSelection@document->filter#add" } do |form| %>
-      <%= render @filter_chips, form: form %>
-    <% end %>
-  </div>
+    <div class="flex flex-row">
+
+      <div>
+        <%= render @filter_chips, form: form %>
+      </div>
+
+      <div class="ml-auto flex">
+        <%= label_tag 'filter[sort]', 'Sort By: ', class: 'self-center mr-1' %>
+        <%= select_tag 'filter[sort]', 
+          options_for_select({ 'Newest first' => '-release_year',
+                              'Oldest first' => 'release_year',
+                              'Film name' => 'name' },
+                             params.dig('filter', 'sort') || 'release_year'),
+            class: 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500',
+            data: { controller: 'submit',
+                  action: 'submit#submit' } %>
+      </div>
+
+    </div>
+
+  <% end %>
 
   <%= render @films %>
   <%= paginate(@films, @query_params)%>

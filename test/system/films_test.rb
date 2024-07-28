@@ -12,20 +12,6 @@ class FilmsTest < ApplicationSystemTestCase
     assert_selector 'h1', text: 'Films'
   end
 
-  test 'should create film' do
-    visit films_url
-    click_on 'New film'
-
-    select @film.distributor.name, from: 'film_distributor_id'
-    fill_in 'Name', with: @film.name
-    select @film.production_company.name, from: 'film_production_company_id'
-    fill_in 'Release year', with: @film.release_year
-    click_on 'Create Film'
-
-    assert_text 'Film was successfully created'
-    click_on 'Back'
-  end
-
   test 'should update Film' do
     visit film_url(@film)
     click_on 'Edit this film', match: :first
