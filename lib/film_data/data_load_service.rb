@@ -12,7 +12,7 @@ module FilmData
 
     def process_film_data(data)
       film = Film.find_or_initialize_by(name: data.title, release_year: data.release_year)
-      build_location(film, data) if data.location.present?
+      film.film_locations.build(location: build_location(data)) if data.location.present?
 
       if film.new_record?
         build_companies(film, data)
@@ -26,15 +26,11 @@ module FilmData
 
     private
 
-    def build_location(film, data)
+    def build_location(data)
       Location.find_or_initialize_by(name: data.location) do |location|
-        film.film_locations.build(location:)
-
-        if location.new_record?
-          location.assign_attributes(find_neighborhood_id: data.find_neighborhood_id,
-                                     analysis_neighborhood_id: data.analysis_neighborhood_id,
-                                     supervisor_district_id: data.supervisor_district_id)
-        end
+        location.assign_attributes(find_neighborhood_id: data.find_neighborhood_id,
+                                   analysis_neighborhood_id: data.analysis_neighborhood_id,
+                                   supervisor_district_id: data.supervisor_district_id)
       end
     end
 
