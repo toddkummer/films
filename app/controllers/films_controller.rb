@@ -10,6 +10,9 @@ class FilmsController < ApplicationController
   filter :writer_id, name: :written_by
   filter :actor_id, name: :acted_by
 
+  sort :release_year
+  default_sort release_year: :asc
+
   EAGER_LOADS_FOR_INDEX = [:production_company, :distributor,
                            { film_locations: :location,
                              directing_credits: :person,
@@ -80,7 +83,10 @@ class FilmsController < ApplicationController
   end
 
   def build_filter_chips
-    @filter_chips = params.to_unsafe_h.fetch(:filter, []).map do |field_name, value|
+    @filter_chips = params.to_unsafe_h
+                          .fetch(:filter, {})
+                          .except(:sort)
+                          .map do |field_name, value|
       Filter.factory(field_name, value)
     end
   end
