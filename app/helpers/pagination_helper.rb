@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Pagination Helper
+# # Pagination Helper
 #
 # Module PaginationHelper provides the helper method paginate, which takes the following arguments:
 # - query: the ActiveRecord query

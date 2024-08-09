@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Pagination
+# # Pagination
 #
 # Class Pagination provides the following helper methods:
 # - show_pagination?

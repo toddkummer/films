@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Company
+# # Company
 class Company < ApplicationRecord
   with_options class_name: 'Film', dependent: :destroy do
     has_many :film_productions, inverse_of: :production_company, foreign_key: :production_company_id

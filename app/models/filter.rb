@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Filter Label Maker
+# # Filter Label Maker
 class FilterLabelMaker
   TYPES_OF_PEOPLE = %w[Actor Director Writer].freeze
 
@@ -22,7 +22,7 @@ class FilterLabelMaker
   end
 end
 
-# = Filter
+# # Filter
 class Filter
   include ActiveModel::API
 

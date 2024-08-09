@@ -3,7 +3,7 @@
 require 'csv'
 
 module FilmData
-  # = Film Locations in San Francisco
+  # # Film Locations in San Francisco
   #
   # Class FilmLocationsInSanFrancisco represents each row in the data set.
   class FilmLocationsInSanFrancisco

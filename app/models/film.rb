@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# = Film
+# # Film
+#
 class Film < ApplicationRecord
   belongs_to :production_company, class_name: 'Company'
   belongs_to :distributor, class_name: 'Company', optional: true
