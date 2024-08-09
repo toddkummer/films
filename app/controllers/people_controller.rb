@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class PeopleController < ApplicationController
-  before_action :build_filtered_query, only: :index
   before_action :set_person, only: %i[show edit update destroy]
 
   filter :name, partial: true
@@ -11,6 +10,7 @@ class PeopleController < ApplicationController
 
   # GET /people
   def index
+    @people = build_query_from_filters
     respond_to do |format|
       format.html
       format.json { render json: @people.limit(page_limit), only: %i[id name] }

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class FilmsController < ApplicationController
-  before_action :build_filtered_query, only: :index
   before_action :set_film, only: %i[show edit update destroy]
 
   filter :name, partial: true
@@ -21,7 +20,7 @@ class FilmsController < ApplicationController
 
   # GET /films
   def index
-    @films = @films.includes(EAGER_LOADS_FOR_INDEX)
+    @films = build_query_from_filters(Film.includes(EAGER_LOADS_FOR_INDEX))
     @films = paginate_resource(@films)
 
     respond_to do |format|
