@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module FilmData
-  # = Data Load Service
+  # # Data Load Service
   #
   # Class DataLoadService processes an instance of FilmLocationsInSanFrancisco to build out the
   # related models.

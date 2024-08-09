@@ -2,7 +2,7 @@
 
 require_relative 'poster_client'
 
-# = TMDB
+# # TMDB
 #
 # The Movie Database
 module TMDB

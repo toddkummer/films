@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Person
+# # Person
 class Person < ApplicationRecord
   has_many :roles, class_name: 'PersonRole', dependent: :destroy
 

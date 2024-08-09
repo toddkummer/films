@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Writing Credit
+# # Writing Credit
 #
 # Class WritingCredit lists the films an writer has authored.
 class WritingCredit < ApplicationRecord

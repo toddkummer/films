@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Film Location
+# # Film Location
 class FilmLocation < ApplicationRecord
   belongs_to :film
   belongs_to :location

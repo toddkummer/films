@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# = Directing Credit
+# # Directing Credit
 #
 # Class DirectingCredit lists the films director has made.
 class DirectingCredit < ApplicationRecord
