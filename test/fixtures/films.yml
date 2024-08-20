@@ -11,3 +11,9 @@ two:
   release_year: 1
   production_company: two
   distributor: two
+
+no_poster:
+  name: Film Without a Poster
+  release_year: 1989
+  production_company: two
+  distributor: two
