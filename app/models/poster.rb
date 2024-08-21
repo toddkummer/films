@@ -2,6 +2,9 @@
 
 # Model Poster caches the poster filename from TMDB.
 class Poster < ApplicationRecord
+  # ABX, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons
+  NOT_FOUND_URL = 'https://upload.wikimedia.org/wikipedia/commons/5/5f/P_Movie.svg'
+
   belongs_to :film
 
   class << self
@@ -14,7 +17,7 @@ class Poster < ApplicationRecord
 
     def lookup_and_create(film_id)
       film = Film.find(film_id)
-      filename = poster_client.for_movie(film.name, film.release_year)
+      filename = poster_client.for_movie(film.name, film.release_year).presence || NOT_FOUND_URL
       film.create_poster!(filename: filename)
     end
 
@@ -25,6 +28,8 @@ class Poster < ApplicationRecord
   end
 
   def url
+    return filename if filename == NOT_FOUND_URL
+
     "https://image.tmdb.org/t/p/w500#{filename}"
   end
 end

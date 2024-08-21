@@ -20,11 +20,22 @@ module Films
       assert_mock pcm
     end
 
+    def test_for_film_when_poster_not_found
+      film = films(:no_poster)
+      pcm = poster_client_mock(film.name, film.release_year, poster_path: '')
+      Poster.stub :poster_client, pcm do
+        poster = Poster.for_film(film.id)
+        assert_equal Poster::NOT_FOUND_URL, poster.filename
+      end
+
+      assert_mock pcm
+    end
+
     private
 
-    def poster_client_mock(name, release_year)
+    def poster_client_mock(name, release_year, poster_path: '/the_poster')
       mock = Minitest::Mock.new
-      mock.expect :for_movie, '/the_poster', [name, release_year]
+      mock.expect :for_movie, poster_path, [name, release_year]
       mock
     end
   end
