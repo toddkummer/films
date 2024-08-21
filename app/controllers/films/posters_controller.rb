@@ -5,7 +5,9 @@ module Films
   class PostersController < ApplicationController
     before_action :set_poster, only: %i[show]
 
-    def show; end
+    def show
+      @width = params[:width] || 500
+    end
 
     private
 

@@ -27,9 +27,9 @@ class Poster < ApplicationRecord
     end
   end
 
-  def url
+  def url(width = 500)
     return filename if filename == NOT_FOUND_URL
 
-    "https://image.tmdb.org/t/p/w500#{filename}"
+    "https://image.tmdb.org/t/p/w#{width}#{filename}"
   end
 end
