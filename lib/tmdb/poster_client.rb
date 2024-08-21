@@ -11,7 +11,7 @@ module TMDB
   # TODO: Still needs a bit more error handling for when the movie is not found. For example, movie "Good
   # Neighbor Sam" has a typo in the name and is not found.
   class PosterClient
-    SEARCH_MOVIE_URL = 'https://api.themoviedb.org/3/search/multi'
+    SEARCH_MOVIE_URL = 'https://api.themoviedb.org/3/search/movie'
 
     def initialize(token, logger)
       @token = token
@@ -22,7 +22,7 @@ module TMDB
       @logger.info "[#{self.class.name}] Calling TMDB for #{name} (#{release_year})"
 
       results = fetch_movie(name, release_year).presence || fetch_movie(name)
-      results.first['poster_path']
+      results.first['poster_path'] unless results.empty?
     end
 
     private
