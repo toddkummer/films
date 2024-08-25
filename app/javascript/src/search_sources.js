@@ -8,11 +8,12 @@ export class SearchSource {
 
   constructor(quickSearch) {
     this.quickSearch = quickSearch
-  }
 
-  // not sure why the method needs to also be exposed as a property,
-  // this matches the object literal created in the examples
-  getItems = this.getItems.bind(this)
+    // these methods are used in callbacks by Algolia Autocomplete, so need to be bound to the instance
+    this.getItems = this.getItems.bind(this)
+    this.onSelect = this.onSelect.bind(this)
+}
+
   getItems({ query }) {
     if (this.skip(query)) {
       return []
@@ -21,7 +22,6 @@ export class SearchSource {
     }
   }
 
-  onSelect = this.onSelect.bind(this)
   onSelect(params) {
     this.quickSearch.onSelect(this.constructor.filterKey, this.filterValue(params.item))
   }
