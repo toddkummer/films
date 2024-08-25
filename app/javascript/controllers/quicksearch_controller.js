@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { autocomplete } from '@algolia/autocomplete-js'
-import * as SearchSources from '../search_sources'
+import * as SearchSources from 'src/search_sources'
 
 window.process = { env: {} }
 
