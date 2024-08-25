@@ -1,13 +1,11 @@
-<div>
-<%= link_to film,  class: "grid grid-cols-3 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100" do %>
-    <div class="">
-        <%= film_poster(film, 500) %>
-    </div>
-    <div class="p-4 leading-normal col-span-2">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><%= film.name %> (<%= film.release_year%>)</h5>
-        <p class="mb-3 font-normal text-gray-700">Locations: <%= film.location_names.to_sentence %></p>
-        <p class="mb-3 font-normal text-gray-700">Actors: <%= film.actors.map(&:name).to_sentence %></p>
-        <p class="mb-3 font-normal text-gray-700">Directed by <%= film.directors.to_sentence %></p>
-    </div>
-<% end %>
-</div>
+    <%= link_to film,  class: "tile bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100" do %>
+        <div class="poster">
+            <%= film_poster(film, 500) %>
+        </div>
+        <div class="film-info">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><%= film.name %></h5>
+            <p class="mb-3 font-normal text-gray-700">Filmed at <%= film.location_names.to_sentence %>.</p>
+            <p class="mb-3 font-normal text-gray-700">Starring <%= film.actors.map(&:name).to_sentence %>.</p>
+            <p class="mb-3 font-normal text-gray-700">Directed by <%= film.directors.to_sentence %>, <%= film.release_year %>.</p>
+        </div>
+    <% end %>
