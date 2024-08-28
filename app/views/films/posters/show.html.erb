@@ -5,7 +5,7 @@
     <% end %>
 
     <%= turbo_frame_tag 'poster' do %>
-      <%= render partial: 'posters/poster', locals: { poster: @poster } %>
+      <%= render partial: 'posters/poster', locals: { poster: @poster, width: @width } %>
     <% end %>
   </div>
 </div>

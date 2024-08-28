@@ -41,7 +41,9 @@
 
   <% end %>
 
-  <%= render @films %>
+  <div class="tiles">
+    <%= render partial: 'tile', collection: @films, as: :film %>
+  </div>
   <%= paginate(@films, @query_params)%>
 
 </div>

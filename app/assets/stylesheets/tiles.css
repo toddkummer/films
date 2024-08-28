@@ -1,0 +1,31 @@
+.tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    /* settings for each tile/item in the tiles container */
+    flex-basis: 500px;
+    flex-grow: 1;
+  }
+  .poster {
+    flex-basis: 200px;
+    flex-shrink: 1;
+    flex-grow: 1;
+  }
+  .poster img {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;  
+  }
+  .film-info {
+    flex-basis: 290px;
+    flex-shrink: 1;
+    flex-grow: 2;
+  }

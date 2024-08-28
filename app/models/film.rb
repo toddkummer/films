@@ -42,4 +42,8 @@ class Film < ApplicationRecord
   def actors
     acting_credits.map(&:person)
   end
+
+  def location_names
+    film_locations.map(&:location).map(&:name)
+  end
 end
