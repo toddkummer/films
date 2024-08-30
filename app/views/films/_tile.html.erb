@@ -3,9 +3,9 @@
             <%= film_poster(film, 500) %>
         </div>
         <div class="film-info">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><%= film.name %></h5>
-            <p class="mb-3 font-normal text-gray-700">Filmed at <%= film.location_names.to_sentence %>.</p>
-            <p class="mb-3 font-normal text-gray-700">Starring <%= film.actors.map(&:name).to_sentence %>.</p>
-            <p class="mb-3 font-normal text-gray-700">Directed by <%= film.directors.to_sentence %>, <%= film.release_year %>.</p>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight"><%= film.name %></h5>
+            <%= tag.p("Filmed at #{film.location_names.to_sentence}.") unless film.location_names.empty? %>
+            <p>Starring <%= film.actors.map(&:name).to_sentence %>.</p>
+            <p>Directed by <%= film.directors.to_sentence %>, <%= film.release_year %>.</p>
         </div>
     <% end %>

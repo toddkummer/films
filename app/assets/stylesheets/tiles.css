@@ -12,6 +12,9 @@
     flex-basis: 500px;
     flex-grow: 1;
   }
+  .tile p {
+    margin-bottom: 10px;
+  }
   .poster {
     flex-basis: 200px;
     flex-shrink: 1;
