@@ -7,18 +7,15 @@
     <h1 class="font-bold text-4xl">Films</h1>
   </div>
 
-  <div class="my-3"
-      data-controller="quicksearch"
-      data-quicksearch-placeholder-value="Search for films"
-      data-quicksearch-source-mapping-value=<%= { name: 'NameContainsSource', 
-                                                  films: 'FilmsSource',
-                                                  location_id: 'LocationsSource',
-                                                  director_id: 'DirectorsSource',
-                                                  writer_id: 'WritersSource',
-                                                  actor_id: 'ActorsSource' }.to_json %>
-    >
-    <div class="my-3" data-quicksearch-target="searchInput"></div>
-  </div>
+
+  <%= quick_search({ name: 'NameContainsSource', 
+                     films: 'FilmsSource',
+                     location_id: 'LocationsSource',
+                     director_id: 'DirectorsSource',
+                     writer_id: 'WritersSource',
+                     actor_id: 'ActorsSource' },
+                   placeholder: 'Search for films',
+                   class: 'my-3') %>
 
   <%= form_with url: films_path, scope: :filter,
                                    method: :get,
