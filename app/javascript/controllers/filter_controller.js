@@ -2,8 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   add(event) {
-    const { fieldName, value } = event.detail
-    this.element.appendChild(this.buildHiddenInput(fieldName, value))
+    const { searchKey, value } = event.detail
+    this.element.appendChild(this.buildHiddenInput(searchKey, value))
     this.element.requestSubmit()
   }
 
