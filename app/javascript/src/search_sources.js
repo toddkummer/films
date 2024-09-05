@@ -6,12 +6,13 @@ export class SearchSource {
 
   constructor(searchKey, onSelectCallback) {
     this.searchKey = searchKey
+    this.sourceId = searchKey // required by AA, but not interesting to Quick Search
     this.onSelectCallback = onSelectCallback
 
     // these methods are used in callbacks by Algolia Autocomplete, so need to be bound to the instance
     this.getItems = this.getItems.bind(this)
     this.onSelect = this.onSelect.bind(this)
-}
+  }
 
   getItems({ query }) {
     if (this.skip(query)) {
@@ -63,8 +64,6 @@ export class SearchSource {
 }
 
 export class NameContainsSource extends SearchSource {
-  sourceId = "name-contains"
-
   templates = {
       item({ item, html }) {
         return html`<span>Name contains "${item.name}"</span>`
@@ -81,7 +80,6 @@ export class NameContainsSource extends SearchSource {
 }
 
 export class FilmsSource extends SearchSource {
-  sourceId = "films"
   powerSearchCode = "F"
 
   async fetchData({ query, limit }) {
@@ -102,7 +100,6 @@ export class FilmsSource extends SearchSource {
 }
 
 export class LocationsSource extends SearchSource {
-  sourceId = "locations"
   powerSearchCode = "L"
 
   async fetchData({ query, limit }) {
@@ -139,7 +136,6 @@ export class PeopleSource extends SearchSource {
 export class DirectorsSource extends PeopleSource {
   static fetchDataAdditionalParams = "&filter[director]=true"
 
-  sourceId = "directors"
   powerSearchCode = "D"
 
   templates = { ...this.templates,
@@ -149,16 +145,12 @@ export class DirectorsSource extends PeopleSource {
 export class WritersSource extends PeopleSource {
   static fetchDataAdditionalParams = "&filter[writer]=true"
 
-  sourceId = "writers"
-
   templates = { ...this.templates,
                 header() { return "Filter by writer" }}
 }
 
 export class ActorsSource extends PeopleSource {
   static fetchDataAdditionalParams = "&filter[actor]=true"
-
-  sourceId = "actors"
 
   templates = { ...this.templates,
                 header() { return "Filter by actor" }}
