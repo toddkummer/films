@@ -8,16 +8,17 @@ export default class extends Controller {
   static targets = ["searchInput"]
   static values = {
     placeholder: String,
-    sources: Array
+    sourceMapping: Object
   }
 
-  onSelect(fieldName, value) {
-    this.dispatch("autocompleteSelection", { prefix: "", detail: { fieldName: fieldName, value: value } })
+  onSelect(searchKey, value) {
+    this.dispatch("autocompleteSelection", { prefix: "", detail: { searchKey: searchKey, value: value } })
     this.element.querySelector("form").reset()
   }
 
   connect() {
-    const sources = this.sourcesValue.map(source => new SearchSources[source](this))
+    // const sources = this.sourcesValue.map(source => new SearchSources[source](this))
+    const sources = this.buildSources()
 
     this.instance = autocomplete({
       container: this.searchInputTarget,
@@ -25,6 +26,10 @@ export default class extends Controller {
       autofocus: true,
       getSources() { return sources },
     })
+  }
+
+  buildSources() {
+    return Object.entries(this.sourceMappingValue).map(([searchKey, source]) => new SearchSources[source](this, searchKey))
   }
 
   disconnect() {

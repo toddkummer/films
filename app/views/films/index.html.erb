@@ -10,7 +10,12 @@
   <div class="my-3"
       data-controller="quicksearch"
       data-quicksearch-placeholder-value="Search for films"
-      data-quicksearch-sources-value=<%= ["NameContainsSource", "FilmsSource", "LocationsSource", "DirectorsSource", "WritersSource", "ActorsSource"].to_json %>
+      data-quicksearch-source-mapping-value=<%= { name: 'NameContainsSource', 
+                                                  films: 'FilmsSource',
+                                                  location_id: 'LocationsSource',
+                                                  director_id: 'DirectorsSource',
+                                                  writer_id: 'WritersSource',
+                                                  actor_id: 'ActorsSource' }.to_json %>
     >
     <div class="my-3" data-quicksearch-target="searchInput"></div>
   </div>

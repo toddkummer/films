@@ -1,13 +1,12 @@
 export class SearchSource {
-  static filterKey
-
   sourceId
   powerSearchCode
   powerSearchRegex = /^(?<code>[a-z{1,2}]):\s*(?<query>.*)/i
   minimumCharactersRequired = 1
 
-  constructor(quickSearch) {
+  constructor(quickSearch, searchKey) {
     this.quickSearch = quickSearch
+    this.searchKey = searchKey
 
     // these methods are used in callbacks by Algolia Autocomplete, so need to be bound to the instance
     this.getItems = this.getItems.bind(this)
@@ -23,7 +22,7 @@ export class SearchSource {
   }
 
   onSelect(params) {
-    this.quickSearch.onSelect(this.constructor.filterKey, this.filterValue(params.item))
+    this.quickSearch.onSelect(this.searchKey, this.filterValue(params.item))
   }
 
   filterValue(item) {
@@ -64,7 +63,6 @@ export class SearchSource {
 }
 
 export class NameContainsSource extends SearchSource {
-  static filterKey = "name"
   sourceId = "name-contains"
 
   templates = {
@@ -104,7 +102,6 @@ export class FilmsSource extends SearchSource {
 }
 
 export class LocationsSource extends SearchSource {
-  static filterKey = "location_id"
   sourceId = "locations"
   powerSearchCode = "L"
 
@@ -124,7 +121,6 @@ export class LocationsSource extends SearchSource {
 }
 
 export class PeopleSource extends SearchSource {
-  static filterKey
   static fetchDataAdditionalParams
 
   templates = {
@@ -141,7 +137,6 @@ export class PeopleSource extends SearchSource {
 
 
 export class DirectorsSource extends PeopleSource {
-  static filterKey = "director_id"
   static fetchDataAdditionalParams = "&filter[director]=true"
 
   sourceId = "directors"
@@ -152,7 +147,6 @@ export class DirectorsSource extends PeopleSource {
 }
 
 export class WritersSource extends PeopleSource {
-  static filterKey = "writer_id"
   static fetchDataAdditionalParams = "&filter[writer]=true"
 
   sourceId = "writers"
@@ -162,7 +156,6 @@ export class WritersSource extends PeopleSource {
 }
 
 export class ActorsSource extends PeopleSource {
-  static filterKey = "actor_id"
   static fetchDataAdditionalParams = "&filter[actor]=true"
 
   sourceId = "actors"
