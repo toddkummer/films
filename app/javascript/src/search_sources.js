@@ -4,9 +4,9 @@ export class SearchSource {
   powerSearchRegex = /^(?<code>[a-z{1,2}]):\s*(?<query>.*)/i
   minimumCharactersRequired = 1
 
-  constructor(quickSearch, searchKey) {
-    this.quickSearch = quickSearch
+  constructor(searchKey, onSelectCallback) {
     this.searchKey = searchKey
+    this.onSelectCallback = onSelectCallback
 
     // these methods are used in callbacks by Algolia Autocomplete, so need to be bound to the instance
     this.getItems = this.getItems.bind(this)
@@ -22,7 +22,7 @@ export class SearchSource {
   }
 
   onSelect(params) {
-    this.quickSearch.onSelect(this.searchKey, this.filterValue(params.item))
+    this.onSelectCallback(this.searchKey, this.filterValue(params.item))
   }
 
   filterValue(item) {

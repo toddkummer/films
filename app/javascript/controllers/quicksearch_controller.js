@@ -29,7 +29,8 @@ export default class extends Controller {
   }
 
   buildSources() {
-    return Object.entries(this.sourceMappingValue).map(([searchKey, source]) => new SearchSources[source](this, searchKey))
+    const callback = this.onSelect.bind(this)
+    return Object.entries(this.sourceMappingValue).map(([searchKey, source]) => new SearchSources[source](searchKey, callback))
   }
 
   disconnect() {
