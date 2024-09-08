@@ -1,4 +1,9 @@
 export class SearchSource {
+  static DEFAULT_LIMIT = 5
+  static EXTENDED_SEARCH_LENGTH = 5
+  static EXTENDED_SEARCH_LIMIT = 20
+  static POWER_SEARCH_LIMIT = 20
+
   sourceId
   powerSearchCode
   powerSearchRegex = /^(?<code>[a-z{1,2}]):\s*(?<query>.*)/i
@@ -52,9 +57,18 @@ export class SearchSource {
   queryOptions(query) {
     const found = query.match(this.powerSearchRegex)
     if (found === null) {
-      return { query, limit: 5 }
+      return { query, limit: this.determineLimit(query) }
     } else {
-      return { query: found.groups.query, limit: 20 }
+      return { query: found.groups.query, limit: this.constructor.POWER_SEARCH_LIMIT }
+    }
+  }
+
+  determineLimit(query) {
+    const len = query.length
+    if (len < this.constructor.EXTENDED_SEARCH_LENGTH) {
+      return this.constructor.DEFAULT_LIMIT
+    } else {
+      return this.constructor.EXTENDED_SEARCH_LIMIT
     }
   }
 
