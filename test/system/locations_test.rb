@@ -12,20 +12,6 @@ class LocationsTest < ApplicationSystemTestCase
     assert_selector 'h1', text: 'Locations'
   end
 
-  test 'should create location' do
-    visit locations_url
-    click_on 'New location'
-
-    fill_in 'Analysis neighborhood', with: @location.analysis_neighborhood_id
-    fill_in 'Find neighborhood', with: @location.find_neighborhood_id
-    fill_in 'Name', with: @location.name
-    fill_in 'Supervisor district', with: @location.supervisor_district_id
-    click_on 'Create Location'
-
-    assert_text 'Location was successfully created'
-    click_on 'Back'
-  end
-
   test 'should update Location' do
     visit location_url(@location)
     click_on 'Edit this location', match: :first

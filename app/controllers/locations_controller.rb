@@ -22,24 +22,8 @@ class LocationsController < ApplicationController
   # GET /locations/1
   def show; end
 
-  # GET /locations/new
-  def new
-    @location = Location.new
-  end
-
   # GET /locations/1/edit
   def edit; end
-
-  # POST /locations
-  def create
-    @location = Location.new(location_params)
-
-    if @location.save
-      redirect_to @location, notice: 'Location was successfully created.'
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
 
   # PATCH/PUT /locations/1
   def update
