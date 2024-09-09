@@ -17,20 +17,32 @@ export default class extends Controller {
   }
 
   connect() {
-    // const sources = this.sourcesValue.map(source => new SearchSources[source](this))
-    const sources = this.buildSources()
+    const sources = this.buildSourcesFromSourceMapping()
+    this.instance = autocomplete(this.buildAutocompleteOptions(sources))
+  }
 
-    this.instance = autocomplete({
+  buildAutocompleteOptions(sources) {
+    return {
       container: this.searchInputTarget,
       placeholder: this.placeholderValue,
       autofocus: true,
       getSources() { return sources },
-    })
+    }
   }
 
-  buildSources() {
+  buildSourcesFromSourceMapping() {
     const callback = this.onSelect.bind(this)
-    return Object.entries(this.sourceMappingValue).map(([searchKey, source]) => new SearchSources[source](searchKey, callback))
+    return Object.entries(this.sourceMappingValue)
+                 .map(([searchKey, source]) => this.buildSource(searchKey, source, callback))
+  }
+
+  buildSource(searchKey, source, callback) {
+    const sourceClass = this.lookupSourceClass(source)
+    return new sourceClass(searchKey, callback)
+  }
+
+  lookupSourceClass(source){
+    return SearchSources[source]
   }
 
   disconnect() {
