@@ -89,6 +89,17 @@ export class FilmsSource extends SearchSource {
 
   templates = {
     header() {
+      return 'Filter by film';
+    },
+    item({ item }) {
+      return `${item.name}`
+    }
+  }
+}
+
+export class FilmsJumpToSource extends FilmsSource {
+  templates = {
+    header() {
       return 'Jump to...';
     },
     item({ item, html }) {
@@ -98,7 +109,6 @@ export class FilmsSource extends SearchSource {
 
   onSelect() { }
 }
-
 export class LocationsSource extends SearchSource {
   powerSearchCode = "L"
 
@@ -113,6 +123,17 @@ export class LocationsSource extends SearchSource {
     },
     item({ item }) {
       return `${item.name}`
+    }
+  }
+}
+
+export class LocationsJumpToSource extends LocationsSource {
+  templates = {
+    header() {
+      return 'Jump to...'
+    },
+    item({ item, html }) {
+      return html`<a href="/locations/${item.id}">${item.name}</a>`
     }
   }
 }

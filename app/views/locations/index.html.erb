@@ -3,10 +3,25 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Locations</h1>
-    <%= link_to 'New location', new_location_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
+  <h1 class="font-bold text-4xl">Locations</h1>
+
+  <%= quick_search({ name: 'NameContainsSource', 
+                     locations: 'LocationsJumpToSource',
+                     film_id: 'FilmsSource' },
+                   placeholder: 'Search for films',
+                   class: 'my-3') %>
+
+  <%= form_with url: locations_path, 
+                scope: :filter,
+                method: :get,
+                data: { controller: "filter",
+                        action: "autocompleteSelection@document->filter#add" } do |form| %>
+    <div class="flex flex-row">
+      <div>
+        <%= render @filter_chips, form: form %>
+      </div>
+    </div>
+  <% end %>
 
   <div id="locations" class="min-w-full">
     <%= render @locations %>
