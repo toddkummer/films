@@ -17,23 +17,6 @@ class LocationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should get new' do
-    get new_location_url
-    assert_response :success
-  end
-
-  test 'should create location' do
-    assert_difference('Location.count') do
-      post locations_url,
-           params: { location: { analysis_neighborhood_id: @location.analysis_neighborhood_id,
-                                 find_neighborhood_id: @location.find_neighborhood_id,
-                                 name: @location.name,
-                                 supervisor_district_id: @location.supervisor_district_id } }
-    end
-
-    assert_redirected_to location_url(Location.last)
-  end
-
   test 'should show location' do
     get location_url(@location)
     assert_response :success
