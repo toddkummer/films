@@ -7,9 +7,8 @@
     <h1 class="font-bold text-4xl">Films</h1>
   </div>
 
-
   <%= quick_search({ name: 'NameContainsSource', 
-                     films: 'FilmsSource',
+                     films: 'FilmsJumpToSource',
                      location_id: 'LocationsSource',
                      director_id: 'DirectorsSource',
                      writer_id: 'WritersSource',
@@ -17,10 +16,11 @@
                    placeholder: 'Search for films',
                    class: 'my-3') %>
 
-  <%= form_with url: films_path, scope: :filter,
-                                   method: :get,
-                                   data: { controller: "filter",
-                                           action: "autocompleteSelection@document->filter#add" } do |form| %>
+  <%= form_with url: films_path, 
+                scope: :filter,
+                method: :get,
+                data: { controller: "filter",
+                        action: "autocompleteSelection@document->filter#add" } do |form| %>
     <div class="flex flex-row">
 
       <div>

@@ -4,12 +4,17 @@ class LocationsController < ApplicationController
   before_action :set_location, only: %i[show edit update destroy]
 
   filter :name, partial: true
+  filter :film_id, association: :film_locations
 
   # GET /locations
   def index
-    @locations = build_query_from_filters
+    @locations = build_query_from_filters(Location.includes(film_locations: :film))
     respond_to do |format|
-      format.html
+      format.html do
+        @query_params = params.to_unsafe_h.slice('filter', 'page')
+        build_filter_chips
+      end
+
       format.json { render json: @locations.limit(page_limit), only: %i[id name] }
     end
   end
@@ -61,5 +66,14 @@ class LocationsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def location_params
     params.require(:location).permit(:name, :find_neighborhood_id, :analysis_neighborhood_id, :supervisor_district_id)
+  end
+
+  def build_filter_chips
+    @filter_chips = params.to_unsafe_h
+                          .fetch(:filter, {})
+                          .except(:sort)
+                          .map do |field_name, value|
+      Filter.factory(field_name, value)
+    end
   end
 end
