@@ -27,8 +27,8 @@ class FilmsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @query_params = params.to_unsafe_h.slice('filter', 'page')
-        build_filter_chips
+        @query_params = build_pagination_query_params
+        @filter_chips = build_filter_chips
       end
       format.json { render json: @films, only: %i[id name release_year] }
     end
@@ -81,14 +81,5 @@ class FilmsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def film_params
     params.require(:film).permit(:name, :release_year, :production_company_id, :distributor_id)
-  end
-
-  def build_filter_chips
-    @filter_chips = params.to_unsafe_h
-                          .fetch(:filter, {})
-                          .except(:sort)
-                          .map do |field_name, value|
-      Filter.factory(field_name, value)
-    end
   end
 end
