@@ -8,6 +8,10 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Layout/SpaceInsideArrayLiteralBrackets:
+  Exclude:
+    - config/environments/production.rb # rails
+
 Rails/I18nLocaleTexts:
   Enabled: false
 
@@ -20,5 +24,21 @@ Style/Documentation:
     - db/migrate/**/*.rb
     - test/**/*.rb
 
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - config/**/*.rb # rails config files skip this
+
+Style/GlobalStdStream:
+  Exclude:
+    - config/environments/production.rb # rails
+
 Style/HashSyntax:
   EnforcedShorthandSyntax: either
+
+Style/StringLiterals:
+  Exclude:
+    - config/**/*.rb # rails files use double quotes
+
+Style/SymbolArray:
+  Exclude:
+    - config/initializers/filter_parameter_logging.rb # rails
