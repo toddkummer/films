@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../film_data/film_data'
-
 namespace :film_data do
   desc 'Reload film data from CSV'
   task reload: %i[clear load]
