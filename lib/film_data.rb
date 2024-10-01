@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'film_locations_in_san_francisco'
-require_relative 'data_load_service'
-
 # # Film Data
 #
 # Module FilmData loads the... film data from a checked-in CSV file. The source is DataSF:

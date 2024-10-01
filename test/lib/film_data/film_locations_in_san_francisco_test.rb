@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require Rails.root.join('lib/film_data/film_data')
 
 module FilmData
   class FilmLocationsInSanFranciscoTest < ActiveSupport::TestCase
