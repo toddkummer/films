@@ -5,6 +5,7 @@ require 'application_system_test_case'
 class LocationsTest < ApplicationSystemTestCase
   setup do
     @location = locations(:one)
+    sign_in
   end
 
   test 'visiting the index' do

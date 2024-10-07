@@ -5,6 +5,7 @@ require 'application_system_test_case'
 class FilmsTest < ApplicationSystemTestCase
   setup do
     @film = films(:one)
+    sign_in
   end
 
   test 'visiting the index' do

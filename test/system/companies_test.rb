@@ -5,6 +5,7 @@ require 'application_system_test_case'
 class CompaniesTest < ApplicationSystemTestCase
   setup do
     @company = companies(:one)
+    sign_in
   end
 
   test 'visiting the index' do

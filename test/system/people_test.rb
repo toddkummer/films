@@ -5,6 +5,7 @@ require 'application_system_test_case'
 class PeopleTest < ApplicationSystemTestCase
   setup do
     @person = people(:one)
+    sign_in
   end
 
   test 'visiting the index' do
