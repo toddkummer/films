@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# # User
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
