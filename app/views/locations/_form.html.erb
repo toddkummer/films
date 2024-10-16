@@ -13,22 +13,22 @@
 
   <div class="my-5">
     <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="my-5">
     <%= form.label :find_neighborhood_id %>
-    <%= form.number_field :find_neighborhood_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.number_field :find_neighborhood_id %>
   </div>
 
   <div class="my-5">
     <%= form.label :analysis_neighborhood_id %>
-    <%= form.text_field :analysis_neighborhood_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_field :analysis_neighborhood_id %>
   </div>
 
   <div class="my-5">
     <%= form.label :supervisor_district_id %>
-    <%= form.number_field :supervisor_district_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.number_field :supervisor_district_id %>
   </div>
 
   <%= render 'shared/form_buttons', form: form %>
