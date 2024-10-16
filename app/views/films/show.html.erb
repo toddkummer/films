@@ -1,9 +1,5 @@
 <div class="mx-auto w-full flex">
   <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
-
     <div class="flex flex-row gap-x-5">
       <%= film_poster(@film) %>
       <%= render @film %>
@@ -14,5 +10,5 @@
       <%= button_to 'Destroy this film', film_path(@film), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
     <%= link_to 'Back to films', films_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  </div>
+  </div>  
 </div>

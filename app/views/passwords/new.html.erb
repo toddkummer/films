@@ -1,8 +1,6 @@
 <section class="max-w-sm">
   <h1 class="font-bold text-2xl mb-5">Forgot your password?</h1>
 
-  <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-
   <%= form_with url: passwords_path, class: 'authentication' do |form| %>
     <div class="mb-5">
       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
