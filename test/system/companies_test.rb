@@ -18,7 +18,7 @@ class CompaniesTest < ApplicationSystemTestCase
     click_on 'New company'
 
     fill_in 'Name', with: @company.name
-    click_on 'Create Company'
+    click_on 'Save'
 
     assert_text 'Company was successfully created'
     click_on 'Back'
@@ -29,7 +29,7 @@ class CompaniesTest < ApplicationSystemTestCase
     click_on 'Edit this company', match: :first
 
     fill_in 'Name', with: @company.name
-    click_on 'Update Company'
+    click_on 'Save'
 
     assert_text 'Company was successfully updated'
     click_on 'Back'

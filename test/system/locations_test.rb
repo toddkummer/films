@@ -21,7 +21,7 @@ class LocationsTest < ApplicationSystemTestCase
     fill_in 'Find neighborhood', with: @location.find_neighborhood_id
     fill_in 'Name', with: @location.name
     fill_in 'Supervisor district', with: @location.supervisor_district_id
-    click_on 'Update Location'
+    click_on 'Save'
 
     assert_text 'Location was successfully updated'
     click_on 'Back'
