@@ -10,7 +10,7 @@ gem 'filterameter', '~> 1.0'
 gem 'next_page'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', github: 'rails/rails'
+gem 'rails', github: 'rails/rails', tag: 'v8.0.0.rc1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
