@@ -1,0 +1,4 @@
+<div class="flex-auto">
+  <%= form.submit %>
+  <%= link_to "Cancel", form.object.persisted? ? form.object : polymorphic_path(form.object.class), class: 'button' %>
+</div>

@@ -5,6 +5,7 @@ require 'application_system_test_case'
 class FilmsTest < ApplicationSystemTestCase
   setup do
     @film = films(:one)
+    sign_in
   end
 
   test 'visiting the index' do
@@ -20,7 +21,7 @@ class FilmsTest < ApplicationSystemTestCase
     fill_in 'Name', with: @film.name
     select @film.production_company.name, from: 'film_production_company_id'
     fill_in 'Release year', with: @film.release_year
-    click_on 'Update Film'
+    click_on 'Save'
 
     assert_text 'Film was successfully updated'
     click_on 'Back'

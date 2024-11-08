@@ -5,6 +5,7 @@ require 'application_system_test_case'
 class PeopleTest < ApplicationSystemTestCase
   setup do
     @person = people(:one)
+    sign_in
   end
 
   test 'visiting the index' do
@@ -17,7 +18,7 @@ class PeopleTest < ApplicationSystemTestCase
     click_on 'New person'
 
     fill_in 'Name', with: @person.name
-    click_on 'Create Person'
+    click_on 'Save'
 
     assert_text 'Person was successfully created'
     click_on 'Back'
@@ -28,7 +29,7 @@ class PeopleTest < ApplicationSystemTestCase
     click_on 'Edit this person', match: :first
 
     fill_in 'Name', with: @person.name
-    click_on 'Update Person'
+    click_on 'Save'
 
     assert_text 'Person was successfully updated'
     click_on 'Back'

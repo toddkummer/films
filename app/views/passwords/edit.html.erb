@@ -1,0 +1,20 @@
+<section class="max-w-sm">
+  <h1 class="font-bold text-2xl mb-5">Update your password</h1>
+
+  <%= form_with url: password_path(params[:token]), class: 'authentication', method: :put do |form| %>
+
+    <%= form.password_field :password,
+          required: true,
+          placeholder: "Enter new password",
+          autocomplete: false,
+          maxlength: 72 %><br>
+
+    <%= form.password_field :password_confirmation,
+          required: true,
+          placeholder: "Repeat new password",
+          autocomplete: false,
+          maxlength: 72 %><br>
+
+    <%= form.submit "Save" %>
+  <% end %>
+</section>
