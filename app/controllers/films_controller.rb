@@ -12,8 +12,6 @@ class FilmsController < ApplicationController
   sort :release_year
   default_sort release_year: :asc
 
-  paginate_with default_limit: 12
-
   EAGER_LOADS_FOR_INDEX = [:production_company, :distributor,
                            { film_locations: :location,
                              directing_credits: :person,
@@ -23,7 +21,7 @@ class FilmsController < ApplicationController
   # GET /films
   def index
     @films = build_query_from_filters(Film.includes(EAGER_LOADS_FOR_INDEX))
-    @films = paginate_resource(@films)
+    @films = paginate_resource(@films, default_limit: 12)
 
     respond_to do |format|
       format.html do

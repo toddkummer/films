@@ -6,12 +6,10 @@ class LocationsController < ApplicationController
   filter :name, partial: true
   filter :film_id, association: :film_locations
 
-  paginate_with default_limit: 12
-
   # GET /locations
   def index
     @locations = build_query_from_filters(Location.includes(film_locations: :film))
-    @locations = paginate_resource(@locations)
+    @locations = paginate_resource(@locations, default_limit: 12)
     respond_to do |format|
       format.html do
         @query_params = build_pagination_query_params
