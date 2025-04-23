@@ -7,7 +7,7 @@ ruby file: '.ruby-version'
 
 gem 'filterameter', '~> 1.0'
 # gem 'filterameter', github: 'RockSolt/filterameter', branch: 'rails-7.2'
-gem 'next_page'
+gem 'next_page', '~> 1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 8.0.1'
