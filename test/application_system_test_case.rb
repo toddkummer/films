@@ -7,7 +7,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   private
 
-  def sign_in_as(user, password = 'password')
+  def sign_in_as(user, password = 'CQiHmDt4aHMH')
     visit new_session_url
     fill_in 'Email', with: user.email_address
     fill_in 'Password', with: password
