@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 import { autocomplete } from '@algolia/autocomplete-js'
-import * as SearchSources from 'src/search_sources'
 
 window.process = { env: {} }
 
@@ -42,7 +41,7 @@ export default class extends Controller {
   }
 
   lookupSourceClass(source){
-    return SearchSources[source]
+    return this.application.quickSearchSources[source]
   }
 
   disconnect() {
