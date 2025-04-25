@@ -24,11 +24,11 @@ module QuickSearchHelper
   def quick_search(sources, placeholder: 'Search', **html_options)
     sources = { sources => sources } if sources.is_a? String
     data = (html_options.delete(:data) || {})
-           .merge(controller: 'quicksearch',
-                  quicksearch_placeholder_value: placeholder,
-                  quicksearch_source_mapping_value: sources.to_json)
+           .merge(controller: 'quick-search',
+                  quick_search_placeholder_value: placeholder,
+                  quick_search_source_mapping_value: sources.to_json)
     tag.div(data: data, **html_options) do
-      tag.div(data: { quicksearch_target: 'searchInput' })
+      tag.div(data: { quick_search_target: 'searchInput' })
     end
   end
 end
