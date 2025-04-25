@@ -1,7 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 import { autocomplete } from '@algolia/autocomplete-js'
 
-window.process = { env: {} }
+// Ensure process.env exists for Algolia Autocomplete
+if (typeof window.process === 'undefined') {
+  window.process = { env: {} };
+} else if (typeof window.process.env === 'undefined') {
+  window.process.env = {};
+}
 
 export default class extends Controller {
   static targets = ["searchInput"]
