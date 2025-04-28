@@ -16,6 +16,13 @@ GIT
     bulma-phlex (0.7.0)
       phlex (>= 2.0.2)
 
+PATH
+  remote: engines/algolia-autocomplete-rails
+  specs:
+    algolia-autocomplete-rails (0.1.0)
+      rails (>= 7.1)
+      stimulus-rails (>= 1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -354,6 +361,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  algolia-autocomplete-rails!
   bcrypt (~> 3.1.7)
   bootsnap
   bulma-phlex!

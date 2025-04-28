@@ -53,6 +53,8 @@ gem 'csv', '~> 3.3'
 gem 'literal', '~> 1.8'
 gem 'phlex-rails', '~> 2.3.1'
 
+gem 'algolia-autocomplete-rails', path: 'engines/algolia-autocomplete-rails'
+
 # https://github.com/ruby/openssl/issues/949
 gem 'openssl', '~> 3.3', '>= 3.3.1'
 

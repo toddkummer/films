@@ -1,4 +1,4 @@
-export class SearchSource {
+export default class {
   static DEFAULT_LIMIT = 5
   static EXTENDED_SEARCH_LENGTH = 5
   static EXTENDED_SEARCH_LIMIT = 20
@@ -36,13 +36,11 @@ export class SearchSource {
   }
 
   skip(query) {
-    return this.askingForHelp(query)  ||
-      this.notEnoughCharacters(query) ||
-      this.nonMatchingPowerSearch(query)
+    return this.askingForHelp(query) || this.notEnoughCharacters(query) || this.nonMatchingPowerSearch(query)
   }
 
   askingForHelp(query) {
-    return 'help' === query.toLowerCase()
+    return "help" === query.toLowerCase()
   }
 
   nonMatchingPowerSearch(query) {
@@ -73,6 +71,6 @@ export class SearchSource {
   }
 
   fetchData({ query, limit }) {
-    throw new Error('Method fetchData must be implemented')
+    throw new Error("Method fetchData must be implemented")
   }
 }
