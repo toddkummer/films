@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Authentication
   include Filterameter::DeclarativeFilters
   include NextPage::Pagination
+  include Phlexable
 
   private
 
