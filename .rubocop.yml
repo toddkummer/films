@@ -12,6 +12,20 @@ Layout/SpaceInsideArrayLiteralBrackets:
   Exclude:
     - config/environments/production.rb # rails
 
+Lint/MissingSuper:
+  Exclude:
+    - app/components/**/*.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - app/components/**/*.rb
+    - app/views/**/*.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - app/components/**/*.rb
+    - app/views/**/*.rb
+
 Rails/I18nLocaleTexts:
   Enabled: false
 
