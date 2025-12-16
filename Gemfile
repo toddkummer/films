@@ -12,8 +12,7 @@ gem 'next_page', '~> 1.0'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 8.0.1'
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'sprockets-rails'
+gem 'propshaft'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 2.1'
@@ -48,6 +47,8 @@ gem 'bootsnap', require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+gem 'bulma-phlex', github: 'rocksolt/bulma-phlex', branch: 'main'
+gem 'bulma-phlex-rails', github: 'rocksolt/bulma-phlex-rails', branch: 'main'
 gem 'csv', '~> 3.3'
 gem 'phlex-rails', '~> 2.3.1'
 

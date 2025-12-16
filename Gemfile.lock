@@ -1,3 +1,21 @@
+GIT
+  remote: https://github.com/rocksolt/bulma-phlex-rails.git
+  revision: 430034080209f3935a1cf5f7d7399f2dd43e357c
+  branch: main
+  specs:
+    bulma-phlex-rails (0.1.0)
+      actionpack (>= 7.2)
+      phlex-rails (>= 2.3)
+      railties (>= 7.2)
+
+GIT
+  remote: https://github.com/rocksolt/bulma-phlex.git
+  revision: 71121596f51f4f0461d97a1c4c32a986c0bb00f2
+  branch: main
+  specs:
+    bulma-phlex (0.7.0)
+      phlex (>= 2.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -197,6 +215,10 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.4.0)
+    propshaft (1.3.1)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -285,14 +307,6 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     shellany (0.0.1)
-    sprockets (4.2.2)
-      concurrent-ruby (~> 1.0)
-      logger
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.2)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sqlite3 (2.6.0-arm64-darwin)
     sqlite3 (2.6.0-x86_64-darwin)
     sqlite3 (2.6.0-x86_64-linux-gnu)
@@ -334,6 +348,8 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
+  bulma-phlex!
+  bulma-phlex-rails!
   capybara
   csv (~> 3.3)
   debug
@@ -344,12 +360,12 @@ DEPENDENCIES
   importmap-rails
   next_page (~> 1.0)
   phlex-rails (~> 2.3.1)
+  propshaft
   puma (~> 6.4)
   rails (~> 8.0.1)
   rubocop (~> 1.54)
   rubocop-rails (~> 2.25.1)
   selenium-webdriver
-  sprockets-rails
   sqlite3 (~> 2.1)
   stimulus-rails
   turbo-rails
