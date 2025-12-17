@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus"
-import * as SearchSources from '../src/search_sources'
+import * as SearchSources from "src/search_sources";
 
 const application = Application.start()
 
