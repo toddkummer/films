@@ -3,7 +3,9 @@
 module Components
   # Base class for Phlex components.
   class Base < Phlex::HTML
-    # Include any helpers you want to be available across all components
+    extend Literal::Properties
+
+    include Phlex::Rails::Helpers::DOMID
     include Phlex::Rails::Helpers::Routes
 
     if Rails.env.development?

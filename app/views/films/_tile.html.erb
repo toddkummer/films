@@ -1,6 +1,6 @@
     <%= link_to film,  class: "tile bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100" do %>
         <div class="poster">
-            <%= film_poster(film, 500) %>
+            <%= render Components::FilmPoster.new(film, width: 500) %>
         </div>
         <div class="film-info">
             <h5 class="mb-2 text-2xl font-bold tracking-tight"><%= film.name %></h5>

@@ -12,6 +12,8 @@ class FilmsController < ApplicationController
   sort :release_year
   default_sort release_year: :asc
 
+  layout false, only: %i[show]
+
   EAGER_LOADS_FOR_INDEX = [:production_company, :distributor,
                            { film_locations: :location,
                              directing_credits: :person,
@@ -33,7 +35,9 @@ class FilmsController < ApplicationController
   end
 
   # GET /films/1
-  def show; end
+  def show
+    render phlex(@film)
+  end
 
   # GET /films/new
   def new
