@@ -53,6 +53,9 @@ gem 'csv', '~> 3.3'
 gem 'literal', '~> 1.8'
 gem 'phlex-rails', '~> 2.3.1'
 
+# https://github.com/ruby/openssl/issues/949
+gem 'openssl', '~> 3.3', '>= 3.3.1'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
