@@ -12,7 +12,7 @@ class FilmsController < ApplicationController
   sort :release_year
   default_sort release_year: :asc
 
-  layout false, only: %i[show]
+  layout false, only: %i[show index]
 
   EAGER_LOADS_FOR_INDEX = [:production_company, :distributor,
                            { film_locations: :location,
@@ -27,8 +27,9 @@ class FilmsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @query_params = build_pagination_query_params
-        @filter_chips = build_filter_chips
+        render phlex(@films, filter_chips: build_filter_chips,
+                             query_params: build_pagination_query_params,
+                             sort: params.dig(:filter, :sort) || 'release_year')
       end
       format.json { render json: @films, only: %i[id name release_year] }
     end

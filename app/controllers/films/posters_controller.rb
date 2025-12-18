@@ -6,10 +6,13 @@ module Films
     layout false
 
     def show
-      render phlex(
-        Poster.for_film(params[:film_id]),
-        width: params[:width] || 500
-      )
+      width = params[:width]
+      width = if width.present?
+                width.to_i
+              else
+                500
+              end
+      render phlex(Poster.for_film(params[:film_id]), width:)
     end
   end
 end

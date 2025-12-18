@@ -3,7 +3,7 @@ require: rubocop-rails
 AllCops:
   NewCops: enable
   SuggestExtensions: false
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.4
 
 Layout/LineLength:
   Max: 120
@@ -17,6 +17,11 @@ Lint/MissingSuper:
     - app/components/**/*.rb
 
 Metrics/AbcSize:
+  Exclude:
+    - app/components/**/*.rb
+    - app/views/**/*.rb
+
+Metrics/BlockLength:
   Exclude:
     - app/components/**/*.rb
     - app/views/**/*.rb

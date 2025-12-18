@@ -9,7 +9,7 @@ module Components
     prop :width, Integer, default: 500
 
     def view_template
-      div(id: dom_id(@poster)) do
+      figure(id: dom_id(@poster), class: 'poster') do
         img src: @poster.url(@width)
       end
     end
