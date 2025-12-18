@@ -4,7 +4,6 @@ module Views
   module Films
     class Show < Views::Base
       include Phlex::Rails::Helpers::DOMID
-      include Phlex::Rails::Helpers::ButtonTo
 
       prop :film, Film, :positional
 

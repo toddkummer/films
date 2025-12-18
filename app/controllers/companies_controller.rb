@@ -2,14 +2,17 @@
 
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy]
+  layout false, only: %i[index show]
 
   # GET /companies
   def index
-    @companies = Company.all
+    render phlex(paginate_resource(Company.all, default_limit: 24))
   end
 
   # GET /companies/1
-  def show; end
+  def show
+    render phlex(@company)
+  end
 
   # GET /companies/new
   def new
