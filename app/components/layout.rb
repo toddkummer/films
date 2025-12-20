@@ -12,7 +12,7 @@ module Components
       @page_info = page_info
     end
 
-    def view_template(&block)
+    def view_template(&)
       doctype
 
       html do
@@ -30,7 +30,7 @@ module Components
           stylesheets
         end
 
-        body(&block)
+        body(&)
       end
     end
 
