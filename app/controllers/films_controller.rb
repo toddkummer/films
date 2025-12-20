@@ -27,9 +27,8 @@ class FilmsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render phlex(@films, filter_chips: build_filter_chips,
-                             query_params: build_pagination_query_params,
-                             sort: params.dig(:filter, :sort) || 'release_year')
+        render phlex(@films, filter_params: params.fetch(:filter, {}),
+                             query_params: build_pagination_query_params)
       end
       format.json { render json: @films, only: %i[id name release_year] }
     end
