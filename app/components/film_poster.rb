@@ -6,7 +6,6 @@ module Components
   # This shows the poster for a film. If the poster has not yet been fetched, this
   # will create a Turbo Frame that will load the poster asynchronously.
   class FilmPoster < Components::Base
-    include Phlex::Rails::Helpers::DOMID
     include Phlex::Rails::Helpers::TurboFrameTag
 
     prop :film, Film, :positional

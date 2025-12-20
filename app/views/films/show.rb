@@ -3,8 +3,6 @@
 module Views
   module Films
     class Show < Views::Base
-      include Phlex::Rails::Helpers::DOMID
-
       prop :film, Film, :positional
 
       def page_title = 'Film'
