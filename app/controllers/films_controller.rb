@@ -24,11 +24,11 @@ class FilmsController < ApplicationController
   def index
     @films = build_query_from_filters(Film.includes(EAGER_LOADS_FOR_INDEX))
     @films = paginate_resource(@films, default_limit: 12)
+    search_params = SearchParameters.build(params, default_sort: 'release_year')
 
     respond_to do |format|
       format.html do
-        render phlex(@films, filter_params: params.fetch(:filter, {}),
-                             query_params: build_pagination_query_params)
+        render phlex(@films, search_params:)
       end
       format.json { render json: @films, only: %i[id name release_year] }
     end

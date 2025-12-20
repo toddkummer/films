@@ -7,8 +7,7 @@ module Views
       include Phlex::Rails::Helpers::OptionsForSelect
 
       prop :films, ActiveRecord::Relation, :positional
-      prop :filter_params, ActionController::Parameters
-      prop :query_params, Hash
+      prop :search_params, SearchParameters
 
       def page_title = 'Films'
       def layout = Layout
@@ -18,28 +17,36 @@ module Views
           BulmaPhlex::Title('Films')
           flash_notifications
 
-          QuickSearch({ name: 'NameContainsSource',
-                        films: 'FilmsJumpToSource',
-                        location_id: 'LocationsSource',
-                        director_id: 'DirectorsSource',
-                        writer_id: 'WritersSource',
-                        actor_id: 'ActorsSource' },
+          QuickSearch(search_sources,
                       placeholder: 'Search for films',
                       search_path: films_path,
-                      filter_params: @filter_params,
-                      sorts: { 'Newest first' => '-release_year',
-                               'Oldest first' => 'release_year',
-                               'Film name' => 'name' })
+                      search_params: @search_params,
+                      sort_options:)
 
           div(class: 'columns is-multiline is-variable is-2') do
             @films.each { |f| film_tile(f) }
           end
 
-          BulmaPhlex::Pagination(@films, ->(page) { films_path(@query_params.merge(page: { number: page })) })
+          BulmaPhlex::Pagination(@films, ->(page) { films_path(@search_params.for_page(page)) })
         end
       end
 
       private
+
+      def search_sources
+        { name: 'NameContainsSource',
+          films: 'FilmsJumpToSource',
+          location_id: 'LocationsSource',
+          director_id: 'DirectorsSource',
+          writer_id: 'WritersSource',
+          actor_id: 'ActorsSource' }
+      end
+
+      def sort_options
+        { 'Newest first' => '-release_year',
+          'Oldest first' => 'release_year',
+          'Film name' => 'name' }
+      end
 
       def film_tile(film)
         div(class: 'column is-full-mobile is-full-tablet is-half-desktop is-one-third-fullhd') do

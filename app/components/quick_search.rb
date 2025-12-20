@@ -36,8 +36,8 @@ module Components
     prop :sources, Hash, :positional
     prop :placeholder, String, default: 'Search'
     prop :search_path, String
-    prop :sorts, Hash
-    prop :filter_params, ActionController::Parameters
+    prop :sort_options, Hash
+    prop :search_params, SearchParameters
 
     def view_template
       quick_search(@sources,
@@ -65,7 +65,7 @@ module Components
                 div(class: 'select') do
                   select(id: 'filter_sort', name: 'filter[sort]',
                          data: { controller: 'submit', action: 'submit#submit' }) do
-                    options_for_select(@sorts, @filter_params['sort'])
+                    options_for_select(@sort_options, @search_params.sort)
                   end
                 end
               end
@@ -78,7 +78,7 @@ module Components
     private
 
     def filter_chips(form)
-      @filter_params.except(:sort)
+      @search_params.filter_params
                     .each { |field_name, value| filter_chip(form, field_name, value) }
     end
 
