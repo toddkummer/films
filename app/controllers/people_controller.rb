@@ -2,6 +2,7 @@
 
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[show edit update destroy]
+  layout false, only: %i[index show]
 
   filter :name, partial: true
   filter :director
@@ -10,15 +11,17 @@ class PeopleController < ApplicationController
 
   # GET /people
   def index
-    @people = build_query_from_filters
+    @people = paginate_resource(build_query_from_filters, default_limit: 24)
     respond_to do |format|
-      format.html
+      format.html { render phlex(@people) }
       format.json { render json: @people.limit(page_limit), only: %i[id name] }
     end
   end
 
   # GET /people/1
-  def show; end
+  def show
+    render phlex(@person)
+  end
 
   # GET /people/new
   def new

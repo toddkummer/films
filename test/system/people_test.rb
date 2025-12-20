@@ -14,8 +14,7 @@ class PeopleTest < ApplicationSystemTestCase
   end
 
   test 'should create person' do
-    visit people_url
-    click_on 'New person'
+    visit new_person_url
 
     fill_in 'Name', with: @person.name
     click_on 'Save'
