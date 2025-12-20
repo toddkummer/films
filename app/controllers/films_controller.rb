@@ -14,7 +14,7 @@ class FilmsController < ApplicationController
 
   layout false, only: %i[show index]
 
-  EAGER_LOADS_FOR_INDEX = [:production_company, :distributor,
+  EAGER_LOADS_FOR_INDEX = [:production_company, :distributor, :poster,
                            { film_locations: :location,
                              directing_credits: :person,
                              acting_credits: :person,
