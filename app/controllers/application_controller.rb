@@ -11,8 +11,4 @@ class ApplicationController < ActionController::Base
   def page_limit
     params.fetch(:limit, 5)
   end
-
-  def build_pagination_query_params
-    params.to_unsafe_h.slice('filter', 'page')
-  end
 end
