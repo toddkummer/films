@@ -4,6 +4,5 @@
 #
 # Class DirectingCredit lists the films director has made.
 class DirectingCredit < ApplicationRecord
-  belongs_to :film
-  belongs_to :person
+  include FilmCredit
 end

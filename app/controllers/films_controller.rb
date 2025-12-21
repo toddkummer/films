@@ -12,7 +12,9 @@ class FilmsController < ApplicationController
   sort :release_year
   default_sort release_year: :asc
 
-  EAGER_LOADS_FOR_INDEX = [:production_company, :distributor,
+  layout false, only: %i[show index]
+
+  EAGER_LOADS_FOR_INDEX = [:production_company, :distributor, :poster,
                            { film_locations: :location,
                              directing_credits: :person,
                              acting_credits: :person,
@@ -22,18 +24,20 @@ class FilmsController < ApplicationController
   def index
     @films = build_query_from_filters(Film.includes(EAGER_LOADS_FOR_INDEX))
     @films = paginate_resource(@films, default_limit: 12)
+    search_params = SearchParameters.build(params, default_sort: 'release_year')
 
     respond_to do |format|
       format.html do
-        @query_params = build_pagination_query_params
-        @filter_chips = build_filter_chips
+        render phlex(@films, search_params:)
       end
       format.json { render json: @films, only: %i[id name release_year] }
     end
   end
 
   # GET /films/1
-  def show; end
+  def show
+    render phlex(@film)
+  end
 
   # GET /films/new
   def new

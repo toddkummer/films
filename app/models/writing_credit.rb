@@ -4,6 +4,5 @@
 #
 # Class WritingCredit lists the films an writer has authored.
 class WritingCredit < ApplicationRecord
-  belongs_to :film
-  belongs_to :person
+  include FilmCredit
 end

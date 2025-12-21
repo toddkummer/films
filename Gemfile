@@ -12,8 +12,7 @@ gem 'next_page', '~> 1.0'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 8.0.1'
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'sprockets-rails'
+gem 'propshaft'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 2.1'
@@ -29,9 +28,6 @@ gem 'turbo-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
-
-# Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem 'tailwindcss-rails', '~> 3.3.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -51,7 +47,14 @@ gem 'bootsnap', require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+gem 'bulma-phlex', github: 'rocksolt/bulma-phlex', branch: 'main'
+gem 'bulma-phlex-rails', github: 'rocksolt/bulma-phlex-rails', branch: 'main'
 gem 'csv', '~> 3.3'
+gem 'literal', '~> 1.8'
+gem 'phlex-rails', '~> 2.3.1'
+
+# https://github.com/ruby/openssl/issues/949
+gem 'openssl', '~> 3.3', '>= 3.3.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -70,5 +73,6 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'minitest', '~> 5.25'
   gem 'selenium-webdriver'
 end

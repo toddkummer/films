@@ -1,4 +1,4 @@
-import { SearchSource } from './search_source'
+import { SearchSource } from "src/search_source";
 
 export class NameContainsSource extends SearchSource {
   templates = {

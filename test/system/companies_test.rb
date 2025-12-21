@@ -14,8 +14,7 @@ class CompaniesTest < ApplicationSystemTestCase
   end
 
   test 'should create company' do
-    visit companies_url
-    click_on 'New company'
+    visit new_company_url
 
     fill_in 'Name', with: @company.name
     click_on 'Save'
