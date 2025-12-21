@@ -10,7 +10,7 @@ module Components
 
     def view_template
       figure(id: dom_id(@poster), class: 'poster') do
-        img src: @poster.url(@width)
+        img src: @poster.url(@width), alt: @poster.film.name
       end
     end
   end
