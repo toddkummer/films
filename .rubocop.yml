@@ -5,6 +5,10 @@ AllCops:
   SuggestExtensions: false
   TargetRubyVersion: 3.4
 
+Naming/FileName:
+  Exclude:
+    - engines/algolia-autocomplete-rails/lib/algolia-autocomplete-rails.rb
+
 Layout/LineLength:
   Max: 120
 

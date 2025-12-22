@@ -47,7 +47,8 @@ module Components
       link rel: 'stylesheet',
            href: 'https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic'
 
-      stylesheet_link_tag :app, 'data-turbo-track': 'reload'
+      stylesheet_link_tag :application, 'data-turbo-track': 'reload'
+      stylesheet_link_tag 'algolia_autocomplete_rails/quick_search', 'data-turbo-track': 'reload'
     end
   end
 end
