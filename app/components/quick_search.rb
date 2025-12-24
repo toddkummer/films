@@ -86,11 +86,11 @@ module Components
       filter = Filter.factory(field_name, value)
       div(class: 'control') do
         form.hidden_field filter.field_name, value: filter.value
-        div(class: 'tags has-addons') do
-          span(class: 'tag is-link') { filter.label }
-          a(class: 'tag is-delete',
-            data: { action: 'click->filter#remove' })
-        end
+        BulmaPhlex::Tag(filter.label, delete: true,
+                                      light: 'info',
+                                      rounded: true,
+                                      size: 'medium',
+                                      data: { action: 'filter#remove' })
       end
     end
   end

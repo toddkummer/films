@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/rocksolt/bulma-phlex.git
-  revision: 71121596f51f4f0461d97a1c4c32a986c0bb00f2
+  revision: 82f614b6136b8f338bc10196522cd9499c9620e4
   branch: main
   specs:
     bulma-phlex (0.7.0)
