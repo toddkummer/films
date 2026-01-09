@@ -47,8 +47,7 @@ gem 'bootsnap', require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
-gem 'bulma-phlex', github: 'rocksolt/bulma-phlex', branch: 'main'
-gem 'bulma-phlex-rails', github: 'rocksolt/bulma-phlex-rails', branch: 'main'
+gem 'bulma-phlex-rails'
 gem 'csv', '~> 3.3'
 gem 'literal', '~> 1.8'
 gem 'phlex-rails', '~> 2.3.1'
