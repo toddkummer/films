@@ -1,4 +1,4 @@
-import SearchSource from "lib/algolia_autocomplete_rails/search_source"
+import SearchSource from "algolia_autocomplete_rails/search_source"
 
 export class NameContainsSource extends SearchSource {
   templates = {
