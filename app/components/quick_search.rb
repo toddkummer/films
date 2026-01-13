@@ -49,8 +49,8 @@ module Components
                 scope: :filter,
                 method: :get,
                 class: 'mb-3',
-                data: { controller: 'filter',
-                        action: 'autocompleteSelection@document->filter#add' } do |form|
+                data: { controller: 'algolia-autocomplete-rails--filter',
+                        action: 'autocompleteSelection@document->algolia-autocomplete-rails--filter#add' } do |form|
         BulmaPhlex::Level() do |level|
           level.left do
             div(class: 'field is-grouped') { filter_chips(form) }
@@ -64,7 +64,8 @@ module Components
               div(class: 'field-body') do
                 div(class: 'select') do
                   select(id: 'filter_sort', name: 'filter[sort]',
-                         data: { controller: 'submit', action: 'submit#submit' }) do
+                         data: { controller: 'algolia-autocomplete-rails--submit',
+                                 action: 'algolia-autocomplete-rails--submit#submit' }) do
                     options_for_select(@sort_options, @search_params.sort)
                   end
                 end
@@ -90,7 +91,7 @@ module Components
                                       light: 'info',
                                       rounded: true,
                                       size: 'medium',
-                                      data: { action: 'filter#remove' })
+                                      data: { action: 'algolia-autocomplete-rails--filter#remove' })
       end
     end
   end
