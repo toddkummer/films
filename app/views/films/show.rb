@@ -16,7 +16,9 @@ module Views
             div(class: 'column') { film }
           end
 
-          a(href: films_path) { 'Back to films' }
+          a(href: films_path) do
+            BulmaPhlex::Icon('fas fa-arrow-left', text_right: 'Back to films')
+          end
         end
       end
 
