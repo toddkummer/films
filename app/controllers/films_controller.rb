@@ -12,7 +12,7 @@ class FilmsController < ApplicationController
   sort :release_year
   default_sort release_year: :asc
 
-  layout false, only: %i[show index]
+  layout false, only: %i[show index edit]
 
   EAGER_LOADS_FOR_INDEX = [:production_company, :distributor, :poster,
                            { film_locations: :location,
@@ -45,7 +45,9 @@ class FilmsController < ApplicationController
   end
 
   # GET /films/1/edit
-  def edit; end
+  def edit
+    render phlex(@film)
+  end
 
   # POST /films
   def create
